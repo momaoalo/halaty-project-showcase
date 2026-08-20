@@ -92,19 +92,21 @@ Halaty's core health experience is designed to answer two questions quickly:
 1. **What is my state today?**
 2. **Why did it change?**
 
-A top-level summary stays simple, while deeper screens expose the measurements, history, and context for users who want to inspect the detail.
+A top-level summary stays simple, while deeper screens expose measurements, history, and context for users who want to inspect the detail.
 
 <p align="center">
-  <img src="assets/screenshots/02-sleep-overview.jpg" width="30%" alt="Halaty Sleep overview" />
-  &nbsp;
-  <img src="assets/screenshots/03-sleep-detail.jpg" width="30%" alt="Halaty Sleep stages and detail" />
-  &nbsp;
-  <img src="assets/screenshots/05-strain-analysis.jpg" width="30%" alt="Halaty Strain analysis" />
+  <img src="assets/screenshots/02-sleep-overview.jpg" width="42%" alt="Halaty Sleep overview" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/04-recovery.jpg" width="42%" alt="Halaty Recovery overview" />
+</p>
+
+<p align="center">
+  <sub><b>Sleep</b> — summarize the night &nbsp;&nbsp; · &nbsp;&nbsp; <b>Recovery</b> — translate signals into context</sub>
 </p>
 
 ### Sleep
 
-The sleep area separates the headline score from the deeper explanation. Users can move from a quick summary into duration, consistency, sleep-stage context, sleep debt, and longer-term interpretation.
+The sleep area separates the headline score from the deeper explanation. Users can move from a quick summary into duration, consistency, stage context, sleep debt, and longer-term interpretation.
 
 ### Recovery
 
@@ -112,7 +114,7 @@ Recovery combines signals such as HRV, resting heart rate, and sleep context int
 
 ### Strain & load
 
-Activity and physical load are shown relative to the user's own recent context. The experience is intended to make a low-activity or high-load day understandable rather than treating every number as an isolated target.
+Activity and physical load are interpreted relative to the user's own recent context. The experience aims to make a low-activity or high-load day understandable rather than treating every number as an isolated target.
 
 ---
 
@@ -120,19 +122,15 @@ Activity and physical load are shown relative to the user's own recent context. 
 
 Nutrition is designed as **one contributor to the daily health picture**, not a separate logging chore.
 
-The product direction focuses on:
+The product direction includes:
 
 - Arabic and English food search;
 - clear portions and serving quantities;
 - calorie and macro targets;
 - quick reuse of frequent meals;
 - barcode-based product lookup;
-- saved/recent meal patterns;
+- saved and recent meal patterns;
 - reducing the number of steps required to log food.
-
-<p align="center">
-  <img src="assets/screenshots/06-nutrition.jpg" width="42%" alt="Halaty Nutrition dashboard" />
-</p>
 
 The main UX objective is straightforward: **logging should be fast enough that the user can sustain it**, while deeper nutrition detail remains available when needed.
 
@@ -164,19 +162,31 @@ A central product goal is to avoid treating recovery and training as separate st
 
 ## 4. Progress & deeper insight
 
-Daily health is only useful if users can understand what is changing over time.
+Daily health is more useful when users can understand what is changing over time. Halaty therefore includes product areas for:
 
-Halaty therefore includes deeper views for body composition, goals, and exploratory long-term indicators.
+- body weight and composition;
+- personal goals and completion tracking;
+- weekly and monthly reports;
+- trends and historical comparisons;
+- exploratory long-term indicators such as biological-age estimates;
+- progress views that connect behavior with longer-term change.
 
-<p align="center">
-  <img src="assets/screenshots/08-body-composition.jpg" width="30%" alt="Halaty Body composition" />
-  &nbsp;
-  <img src="assets/screenshots/09-biological-age.jpg" width="30%" alt="Halaty Biological age" />
-  &nbsp;
-  <img src="assets/screenshots/10-goals.jpg" width="30%" alt="Halaty Goals" />
-</p>
+The direction is to move beyond a one-day dashboard and create a **continuous story of behavior, health signals, and progress**.
 
-These screens are designed to move the product beyond a one-day dashboard and toward a **continuous story of behavior, health signals, and progress**.
+---
+
+## Supporting experiences
+
+Beyond the four main areas, the product also explores:
+
+| Area | Purpose |
+| --- | --- |
+| **Reports** | Weekly/monthly review and longer-term context |
+| **Body & progress** | Weight, composition, measurements, and physical change |
+| **Goals** | Daily and weekly behavior targets |
+| **Friends** | Permission-controlled, read-only sharing of selected information |
+| **Coaching** | Contextual AI-assisted guidance and human-coach workflows |
+| **Onboarding** | Introduce the product and establish required permissions/data inputs |
 
 ---
 
@@ -194,10 +204,7 @@ The experience is structured in three levels:
 | **2 — Understand why** | “Why?” | Show the most relevant drivers and context |
 | **3 — Explore deeply** | “What changed over time?” | Trends, history, advanced detail, reports |
 
-This structure helps the same product serve both:
-
-- users who want a 10-second daily summary; and
-- users who want to inspect detailed health and performance information.
+This structure helps the same product serve both users who want a 10-second daily summary and users who want to inspect detailed health and performance information.
 
 ---
 
