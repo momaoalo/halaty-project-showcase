@@ -24,6 +24,8 @@ The product brings those areas into one experience built around three questions:
 
 This repository is a public **product portfolio and case study** for the current pre-launch build.
 
+**My direct focus:** requirements, prioritization, UX review, testing, product decisions, and evaluating the implemented experience.
+
 ---
 
 ## Product preview
