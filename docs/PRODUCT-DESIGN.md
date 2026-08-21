@@ -214,4 +214,4 @@ My strongest direct contribution is in:
 - prioritizing improvements;
 - maintaining consistency across a broad product.
 
-The implementation has been developed iteratively with AI-assisted coding, while my main hands-on focus is the product, front-end experience, requirements, and review of the implemented result.
+The technical implementation is documented elsewhere in this portfolio. My direct hands-on focus is the product experience, requirements, front-end review, prioritization, testing, and evaluation of the implemented result.
