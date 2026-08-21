@@ -125,7 +125,7 @@ See the detailed **[Business Analysis Case Study](BUSINESS-ANALYSIS-CASE-STUDY.m
 | **Issue** | Dense health screens become difficult to scan | progressive disclosure and drill-down |
 | **Dependency** | Backend availability | local-first interaction and later synchronization |
 
-## Change management example
+## Example of managing a product change
 
 One recurring change pattern is moving detail away from the first screen without deleting it.
 
