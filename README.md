@@ -2,323 +2,318 @@
 
 # Halaty (حالتي)
 
-### Arabic-first personal health experience for iOS
+### Arabic-first personal health platform for iOS
 
-**Sleep · Recovery · Nutrition · Training · Progress — connected into one daily experience**
+**Sleep · Recovery · Strain · Nutrition · Training · Progress — connected into one daily decision experience**
 
-`Pre-launch` · `Arabic-first` · `iOS` · `Personal Health`
+`Pre-launch` · `React Native / Expo` · `HealthKit` · `Supabase` · `Arabic / English`
 
 > **How am I today, why, and what should I do next?**
 
-This repository is a public showcase of the product and the work behind its experience.  
-The production source code remains private.
+This repository is a public **product + technical case study**.  
+The production application and full source code remain private.
 
 </div>
 
 ---
 
-## At a glance
+## Start here
 
-| | |
+This showcase is intentionally structured so different reviewers can inspect the part relevant to them.
+
+| If you want to understand… | Read |
 | --- | --- |
-| **Product** | Personal health & wellness application |
-| **Primary audience** | Arabic-speaking users, with a Saudi/Gulf-first product direction |
-| **Platform** | iOS |
-| **Core experience** | Daily state, sleep, recovery, nutrition, training, progress |
-| **Stage** | Active pre-launch product |
-| **Public scope** | Product, UX, feature structure, decisions, and selected screenshots |
-| **Private scope** | Production source code, credentials, infrastructure details, internal implementation material |
+| **the product and UX thinking** | [Product & UX Design](docs/PRODUCT-DESIGN.md) |
+| **how the application is structured** | [System Architecture](docs/ARCHITECTURE.md) |
+| **the backend, data and Supabase model** | [Backend & Data](docs/BACKEND-AND-DATA.md) |
+| **the actual scoring logic / algorithms** | [Core Algorithms](docs/CORE-ALGORITHMS.md) |
+| **testing, security and release quality** | [Quality & Testing](docs/QUALITY-AND-TESTING.md) |
+| **where things live in the private source tree** | [Project Map](docs/PROJECT-MAP.md) |
 
 ---
 
-## Product preview
+## Product in 30 seconds
 
-The screenshots below are from the current pre-launch iOS build and show the breadth of the product across daily health, recovery, sleep, nutrition, training, progress, goals, and deeper insight views.
+Halaty is a personal health platform built around a simple problem: health-conscious users often split their day across one app for sleep/recovery, another for food, another for workouts, and separate tools for trends and body progress.
 
-<p align="center">
-  <img src="assets/screenshots/gallery-01.jpeg" width="30%" alt="Halaty product screen 1" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-02.jpeg" width="30%" alt="Halaty product screen 2" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-03.jpeg" width="30%" alt="Halaty product screen 3" />
-</p>
+Halaty's direction is to make those domains contribute to **one understandable picture of the user's day** instead of behaving like unrelated mini-apps.
 
 <p align="center">
-  <img src="assets/screenshots/gallery-04.jpeg" width="30%" alt="Halaty product screen 4" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-05.jpeg" width="30%" alt="Halaty product screen 5" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-06.jpeg" width="30%" alt="Halaty product screen 6" />
+  <img src="assets/screenshots/gallery-01.jpeg" width="29%" alt="Halaty current-build screen" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/gallery-02.jpeg" width="29%" alt="Halaty current-build screen" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/gallery-03.jpeg" width="29%" alt="Halaty current-build screen" />
 </p>
 
-<p align="center">
-  <img src="assets/screenshots/gallery-07.jpeg" width="30%" alt="Halaty product screen 7" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-08.jpeg" width="30%" alt="Halaty product screen 8" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-09.jpeg" width="30%" alt="Halaty product screen 9" />
-</p>
+<p align="center"><sub>Selected screens from the current Arabic-first pre-launch build. The full gallery is available near the bottom of this page.</sub></p>
 
-<p align="center">
-  <img src="assets/screenshots/gallery-10.jpeg" width="30%" alt="Halaty product screen 10" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-11.jpeg" width="30%" alt="Halaty product screen 11" />
-  &nbsp;
-  <img src="assets/screenshots/gallery-12.jpeg" width="30%" alt="Halaty product screen 12" />
-</p>
-
-<p align="center">
-  <sub>Selected current-build screens — Arabic-first UI, daily health interpretation, tracking, training, nutrition, and progress.</sub>
-</p>
-
----
-
-## The problem
-
-People who actively track health and fitness often split their day across several products:
-
-- a wearable or recovery app for sleep and readiness;
-- a nutrition app for food and macro tracking;
-- a training app for workouts;
-- separate views for body progress, trends, and goals.
-
-That creates **more data, but not necessarily more clarity**.
-
-Halaty explores a different product model: **sleep, recovery, nutrition, training, and progress should contribute to one understandable picture of the user's day** rather than behaving like disconnected apps under one navigation bar.
-
----
-
-## The product loop
+### Core product loop
 
 ```mermaid
 flowchart LR
-    A[Apple Health & wearable signals] --> D[Daily state]
+    A[Health signals] --> D[Understand today]
     B[Nutrition & manual logs] --> D
     C[Training & activity] --> D
-    D --> E[Explain why]
-    E --> F[Guide the next action]
-    F --> G[Track progress over time]
+    D --> E[Understand why]
+    E --> F[Choose the next action]
+    F --> G[Review progress]
     G --> D
 ```
 
-The product is designed around a recurring loop:
+---
 
-**Understand today → understand why → act → review progress.**
+## What makes the project interesting
+
+Halaty is not only a set of mobile screens. The private project contains several independent layers that have to agree with each other:
+
+- **HealthKit ingestion** for sleep, HRV, resting heart rate, steps, activity and workouts.
+- **Personal baseline logic** rather than treating population averages as the user's normal state.
+- **Scoring engines** for sleep, recovery, strain/fatigue and related derived health states.
+- **Local-first persistence** so daily interaction is not blocked by network availability.
+- **Supabase cloud sync**, authentication, RLS, Edge Functions and conflict-aware writes.
+- **Nutrition workflows** across search, barcode, serving quantity, saved/recent meals and multiple food-data sources.
+- **Training workflows** across planning, workout logging, progression, fatigue/recovery context and Apple Watch interaction.
+- **Arabic-first UX** with RTL hierarchy rather than a translation-only implementation.
+- **Automated quality gates** for types, tests, routes, backend schema/RLS and release checks.
 
 ---
 
-# Product walkthrough
+## System architecture
 
-## 1. Core health experience
+```mermaid
+flowchart TB
+    HK[Apple Health / HealthKit] --> HEALTH[Health extraction & normalization]
+    INPUT[Manual inputs\nNutrition · Training · Body · Goals] --> CORE[Domain core]
+    HEALTH --> CORE
 
-Halaty's core health experience is designed to answer two questions quickly:
+    CORE --> SCORE[Scoring engines]
+    SCORE --> INTEL[Intelligence / guidance]
 
-1. **What is my state today?**
-2. **Why did it change?**
+    CORE --> LOCAL[(Local MMKV)]
+    LOCAL --> UI[React Native feature layer]
+    SCORE --> UI
+    INTEL --> UI
 
-A top-level summary stays simple, while deeper screens expose measurements, history, and context for users who want to inspect the detail.
+    LOCAL --> SYNC[Local-first sync seam]
+    SYNC <--> SB[(Supabase Postgres)]
+    SB --> EDGE[Edge Functions]
+
+    UI <--> WATCH[Apple Watch]
+```
+
+**Current implementation context:** Expo SDK 56, React Native 0.85, React 19, TypeScript, Zustand, MMKV, HealthKit, Supabase and Sentry.
+
+For the architectural boundaries, data flow and source-tree structure, see **[System Architecture →](docs/ARCHITECTURE.md)**.
+
+---
+
+## Selected algorithmic depth
+
+The production scoring implementation lives outside the UI in the private `src/core/scoring/*` domain layer.
 
 ### Sleep
 
-The sleep area separates the headline score from the deeper explanation. Users can move from a quick summary into duration, consistency, stage context, sleep debt, and longer-term interpretation.
+```text
+Sleep =
+  0.30 × Duration
++ 0.30 × Consistency
++ 0.20 × Efficiency
++ 0.15 × Sleep Debt
++ 0.05 × Sleep Latency
+```
+
+The implementation also applies a **duration sufficiency gate** so severe undersleep cannot be hidden by strong secondary components.
 
 ### Recovery
 
-Recovery combines signals such as HRV, resting heart rate, and sleep context into an understandable daily view. The interface is designed to show both the result and the reason behind it.
+```text
+Recovery =
+  0.40 × HRV
++ 0.25 × Resting HR
++ 0.20 × Sleep Recovery
++ 0.15 × Recent Load
+```
 
-### Strain & load
+HRV/RHR are interpreted relative to the user's own baseline rather than being ranked against another person's absolute value.
 
-Activity and physical load are interpreted relative to the user's own recent context. The experience aims to make a low-activity or high-load day understandable rather than treating every number as an isolated target.
+### Strain / accumulated fatigue
 
----
+```text
+Strain =
+  0.30 × Acute:Chronic Load
++ 0.35 × Sleep Debt
++ 0.35 × HRV Suppression
+```
 
-## 2. Nutrition
+The engine requires enough available input weight before returning a value; missing signals are not silently converted into a complete-looking score.
 
-Nutrition is designed as **one contributor to the daily health picture**, not a separate logging chore.
-
-The product direction includes:
-
-- Arabic and English food search;
-- clear portions and serving quantities;
-- calorie and macro targets;
-- quick reuse of frequent meals;
-- barcode-based product lookup;
-- saved and recent meal patterns;
-- reducing the number of steps required to log food.
-
-The main UX objective is straightforward: **logging should be fast enough that the user can sustain it**, while deeper nutrition detail remains available when needed.
-
----
-
-## 3. Training
-
-Training is designed as a broader **physical-performance experience**, not only a set logger.
-
-It includes product concepts around:
-
-- weekly planning;
-- today's suggested session;
-- exercise library;
-- live workout logging;
-- sets, repetitions, rest, and progression;
-- substitutions;
-- muscle-recovery context;
-- imported workout information from Apple Health / Apple Watch;
-- linking training decisions back to recovery.
-
-A central product goal is to avoid treating recovery and training as separate stories: **how the user recovered should matter to what training feels appropriate today.**
+The public document includes selected TypeScript excerpts and explains which constants are evidence-driven versus explicit product/model choices: **[Core Algorithms →](docs/CORE-ALGORITHMS.md)**.
 
 ---
 
-## 4. Progress & deeper insight
+## Backend & data model
 
-Daily health is more useful when users can understand what is changing over time. Halaty therefore includes product areas for:
+Halaty currently uses **Supabase** as its cloud backend while keeping daily interaction local-first.
 
-- body weight and composition;
-- personal goals and completion tracking;
-- weekly and monthly reports;
-- trends and historical comparisons;
-- exploratory long-term indicators such as biological-age estimates;
-- progress views that connect behavior with longer-term change.
+```mermaid
+flowchart LR
+    A[User action] --> R[Repository layer]
+    R --> L[(Local store)]
+    R --> C{Authenticated cloud available?}
+    C -- No --> O[Continue locally]
+    C -- Yes --> S[Supabase adapter]
+    S --> G[Guarded RPC / RLS]
+    G --> P[(Postgres)]
+```
 
-The direction is to move beyond a one-day dashboard and create a **continuous story of behavior, health signals, and progress**.
+Technical areas represented in the private backend include:
+
+- typed Supabase client and generated database types;
+- Auth session persistence and native PKCE flows where required;
+- Row Level Security;
+- version-aware guarded writes;
+- deletion tombstones to reduce stale-data resurrection;
+- Supabase Edge Functions for AI, USDA proxying, account deletion and shared snapshot workflows;
+- privacy boundaries between raw HealthKit data and derived summaries;
+- native local-store protection and fail-closed behavior.
+
+See **[Backend & Data →](docs/BACKEND-AND-DATA.md)**.
 
 ---
 
-## Supporting experiences
+## Product / UX architecture
 
-Beyond the four main areas, the product also explores:
-
-| Area | Purpose |
-| --- | --- |
-| **Reports** | Weekly/monthly review and longer-term context |
-| **Body & progress** | Weight, composition, measurements, and physical change |
-| **Goals** | Daily and weekly behavior targets |
-| **Friends** | Permission-controlled, read-only sharing of selected information |
-| **Coaching** | Contextual AI-assisted guidance and human-coach workflows |
-| **Onboarding** | Introduce the product and establish required permissions/data inputs |
-
----
-
-## Experience architecture
-
-One of the main UX rules used throughout Halaty is:
+One rule carries much of the experience:
 
 > **Depth lives behind drill-down, never on the surface.**
 
-The experience is structured in three levels:
-
-| Level | User question | Product behavior |
+| Level | User question | Experience |
 | --- | --- | --- |
-| **1 — Understand today** | “How am I?” | Show the essential state quickly |
-| **2 — Understand why** | “Why?” | Show the most relevant drivers and context |
-| **3 — Explore deeply** | “What changed over time?” | Trends, history, advanced detail, reports |
+| **1** | How am I? | headline state and the most important action |
+| **2** | Why? | drivers, relevant measurements and context |
+| **3** | What changed? | history, trends, methodology and deeper analysis |
 
-This structure helps the same product serve both users who want a 10-second daily summary and users who want to inspect detailed health and performance information.
+This is applied across sleep, recovery, strain, nutrition, training and progress so the product can support both quick daily use and deeper inspection.
 
----
-
-## Product principles
-
-### Simple first, detailed when requested
-The first screen should communicate the important answer before exposing the detail behind it.
-
-### Explain, not only score
-A number is more useful when the user can understand the factors behind it.
-
-### Do not invent certainty
-Missing, insufficient, or still-learning data should be communicated clearly instead of being presented as a confident-looking value.
-
-### Connect the product areas
-Sleep, recovery, nutrition, training, and progress should tell one story rather than behave like unrelated modules.
-
-### Arabic-first, not Arabic-after
-Arabic affects hierarchy, terminology, layout direction, food search, and the mental model of the product—not only translation.
-
-### Privacy by design
-Health sharing should be explicit and permission-controlled rather than automatically social.
+The design document covers Arabic-first decisions, logging-flow simplification, information hierarchy, confidence/missing-data states and the iteration loop: **[Product & UX Design →](docs/PRODUCT-DESIGN.md)**.
 
 ---
 
-## Examples of product decisions
+## Core product areas
 
-### Information hierarchy
-A recurring decision is what deserves space on the first screen versus what should move into a detail view. This keeps daily use readable without removing depth.
-
-### Reducing friction
-Nutrition and training can require many inputs. The product repeatedly evaluates what must be mandatory, what can be optional, and which steps can be removed or shortened.
-
-### Missing-data behavior
-Health products can look precise even when the underlying data is incomplete. Halaty uses learning states, missing-signal states, and confidence-aware presentation rather than filling gaps with invented certainty.
-
-### Connecting recovery and training
-Recovery is intended to be actionable. The training experience is therefore designed so that readiness and recovery context can affect how the user interprets today's training.
-
-### Controlled social visibility
-Friend-facing experiences are designed around read-only tracking and category-based permissions rather than an open social feed.
+| Area | What it is designed to do |
+| --- | --- |
+| **Today** | turn multiple signals into one understandable daily state |
+| **Sleep** | score the night, explain weak factors and expose deeper sleep context |
+| **Recovery** | interpret HRV, RHR, prior load and sleep against personal history |
+| **Strain** | represent accumulated physical cost separately from readiness |
+| **Nutrition** | make food logging sustainable with fast repeat workflows and source-aware data |
+| **Training** | connect plans, sessions, progression and recovery context |
+| **Body & Progress** | show weight/composition/progress as a longer-term story |
+| **Reports** | move from one-day metrics to week/month trend interpretation |
+| **Friends / Coaching** | permission-aware sharing and contextual guidance |
 
 ---
 
-## My contribution
+## Engineering quality
 
-My primary hands-on contribution to Halaty is in **product direction, product analysis, and user experience**.
+The private repository has explicit commands/gates for:
 
-That includes:
+`lint` · `typecheck` · `tests` · `timezone tests` · `runtime performance` · `route verification` · `Supabase schema checks` · `production RLS smoke` · `release gate` · `App Store checks`
 
-- defining and refining features;
-- turning large ideas into user flows and smaller product decisions;
-- reviewing screens and identifying usability problems;
-- simplifying flows and removing unnecessary steps;
-- deciding what belongs at summary versus detail level;
-- comparing competitor experiences and alternative approaches;
-- prioritizing product and UX improvements;
-- reviewing product behavior and identifying functional gaps;
-- testing iterations and refining the experience based on observed problems;
-- maintaining consistency across health, nutrition, training, progress, and social areas.
+The goal is that a screen rendering successfully is **not** the definition of production readiness.
 
-I can discuss the **product rationale, flows, feature decisions, trade-offs, and front-end experience** in detail.
+See **[Quality & Testing →](docs/QUALITY-AND-TESTING.md)**.
 
 ---
 
-## Technology context
+## Source-tree map
 
-The private application is an iOS-focused mobile product built in a modern **React Native / Expo** environment, integrates with **Apple Health / HealthKit**, and uses **Supabase** for cloud capabilities.
+A technical reviewer does not need thousands of unpublished source lines to understand how the system is divided.
 
-These technologies are included here as product context. This showcase is intentionally centered on the product experience and the areas I personally own and can explain.
+The public project map shows responsibilities such as:
+
+```text
+src/core/scoring/*      health algorithms
+src/core/health/*       HealthKit pipeline
+src/core/nutrition/*    nutrition domain
+src/core/workouts/*     training domain
+src/data/supabase/*     cloud adapter
+supabase/migrations/*   schema / RLS / RPCs
+supabase/functions/*    privileged server operations
+targets/watch/*         Apple Watch target
+```
+
+See **[Project Map →](docs/PROJECT-MAP.md)**.
+
+---
+
+## My role and scope
+
+My strongest hands-on contribution is in **product direction, product analysis and user experience**:
+
+- defining/refining features;
+- breaking large ideas into user flows and product decisions;
+- reviewing real screens and identifying usability/functional gaps;
+- simplifying repeated workflows;
+- deciding summary vs. drill-down hierarchy;
+- comparing competitor/product approaches;
+- prioritizing improvements;
+- iterating across health, nutrition, training, progress and social areas.
+
+I can discuss the product rationale, front-end experience, flows, trade-offs and why particular features are structured the way they are.
+
+The technical documents in this repository describe the **real implemented system** so technical reviewers can inspect the project's depth. They are **not intended to misrepresent my personal backend expertise** or claim that I manually authored every infrastructure mechanism in the private codebase.
 
 ---
 
 ## Current state
 
-Halaty is an **active pre-launch product**.
+Halaty is an **active pre-launch product**. The private codebase contains working and partially working capabilities across daily health, sleep, recovery, strain, nutrition, training, reports, body/progress, coaching, friends, onboarding, HealthKit and Apple Watch integration.
 
-The private codebase includes working and partially working capabilities across:
-
-`Daily Health` · `Sleep` · `Recovery` · `Nutrition` · `Training` · `Reports` · `Body & Progress` · `Coaching` · `Friends` · `Onboarding` · `Health-data integration`
-
-The product is still being iterated. Some areas are more mature than others, and the current product challenge is turning a broad feature set into **one coherent daily experience**.
+Some areas are more mature than others. The current challenge is not simply adding more features; it is making a broad product behave like **one coherent daily system**.
 
 ---
 
-## What this project demonstrates
+<details>
+<summary><strong>View full current-build screenshot gallery (12 screens)</strong></summary>
 
-| Area | Evidence in the project |
-| --- | --- |
-| **Product / Business Analysis** | Problem decomposition, feature definition, workflow thinking, prioritization, gap identification, competitor comparison, iteration |
-| **Product / UX** | Information architecture, progressive disclosure, interaction simplification, consistency, beginner vs. advanced-user balance |
-| **Data-oriented product thinking** | Translating health data into understandable user-facing information, source vs. derived metrics, trends, summaries, confidence-aware presentation |
-| **Product ownership mindset** | Maintaining coherence across multiple domains and repeatedly refining the experience around user value |
+<br />
+
+<p align="center">
+  <img src="assets/screenshots/gallery-01.jpeg" width="30%" alt="Halaty screen 1" />
+  <img src="assets/screenshots/gallery-02.jpeg" width="30%" alt="Halaty screen 2" />
+  <img src="assets/screenshots/gallery-03.jpeg" width="30%" alt="Halaty screen 3" />
+</p>
+<p align="center">
+  <img src="assets/screenshots/gallery-04.jpeg" width="30%" alt="Halaty screen 4" />
+  <img src="assets/screenshots/gallery-05.jpeg" width="30%" alt="Halaty screen 5" />
+  <img src="assets/screenshots/gallery-06.jpeg" width="30%" alt="Halaty screen 6" />
+</p>
+<p align="center">
+  <img src="assets/screenshots/gallery-07.jpeg" width="30%" alt="Halaty screen 7" />
+  <img src="assets/screenshots/gallery-08.jpeg" width="30%" alt="Halaty screen 8" />
+  <img src="assets/screenshots/gallery-09.jpeg" width="30%" alt="Halaty screen 9" />
+</p>
+<p align="center">
+  <img src="assets/screenshots/gallery-10.jpeg" width="30%" alt="Halaty screen 10" />
+  <img src="assets/screenshots/gallery-11.jpeg" width="30%" alt="Halaty screen 11" />
+  <img src="assets/screenshots/gallery-12.jpeg" width="30%" alt="Halaty screen 12" />
+</p>
+
+</details>
 
 ---
 
-## Why the source code is private
+## Why the full source is private
 
-The purpose of this repository is to let recruiters, hiring managers, and collaborators understand:
+This repository is meant to demonstrate the product, architecture, algorithms, design decisions and engineering approach without publishing:
 
-- **what Halaty is;**
-- **what problem it is trying to solve;**
-- **how the experience is structured;**
-- **what product decisions shaped it;**
-- **what work I personally own and can explain.**
+- production credentials or secrets;
+- the full commercial codebase;
+- private infrastructure configuration;
+- production AI prompts/business logic that does not need to be public;
+- user health data.
 
-The production source code, credentials, infrastructure details, and sensitive internal implementation material remain private.
+For hiring discussions, the private implementation can be explained at the level relevant to the role while this repository remains a stable public case study.
