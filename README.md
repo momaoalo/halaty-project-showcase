@@ -31,9 +31,9 @@ This repository is a public **product portfolio and case study** for the current
 **My direct focus:** requirements, prioritization, UX review, testing, product decisions, and evaluating the implemented experience.
 
 <p align="center">
-  <img src="assets/screenshots/home.jpg" width="48%" alt="حالتي Today screen showing a connected daily health view" />
+  <img src="assets/screenshots/home-today.jpeg" width="48%" alt="حالتي Today screen showing the connected daily health view" />
 </p>
-<p align="center"><sub><b>Today</b> — the daily entry point brings the main signals together before the user drills into detail.</sub></p>
+<p align="center"><sub><b>Today</b> — the main entry point brings the user's health day together before deeper exploration.</sub></p>
 
 ---
 
@@ -46,20 +46,30 @@ The product is not designed as a collection of unrelated mini-apps. Each area an
 Sleep starts with a clear headline state, then lets the user inspect duration, consistency, sleep need, stages, interruptions, history, and methodology when more detail is useful.
 
 <p align="center">
-  <img src="assets/screenshots/sleep.jpg" width="44%" alt="حالتي Sleep overview" />
+  <img src="assets/screenshots/sleep-overview.jpeg" width="42%" alt="حالتي Sleep overview" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/sleep-detail.jpeg" width="42%" alt="حالتي Sleep detail" />
 </p>
+<p align="center"><sub><b>Overview</b> for a fast read · <b>Detail</b> for deeper sleep context.</sub></p>
 
 ### Recovery
 
 Recovery interprets signals such as HRV, resting heart rate, sleep, and recent load against the user's own history. The goal is not only to show a score, but to explain **why the user is in that state today**.
 
 <p align="center">
-  <img src="assets/screenshots/recovery.jpg" width="44%" alt="حالتي Recovery overview" />
+  <img src="assets/screenshots/recovery-overview.jpeg" width="42%" alt="حالتي Recovery overview" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/recovery-detail.jpeg" width="42%" alt="حالتي Recovery detail" />
 </p>
+<p align="center"><sub><b>Recovery state</b> first · supporting signals and explanation when the user wants to understand why.</sub></p>
 
 ### Nutrition
 
 Nutrition is designed around a high-frequency task: logging food without turning every meal into a long transaction. Search, serving size × quantity, quick/recent/saved logging, barcode support, and immediate daily totals are treated as one connected flow.
+
+<p align="center">
+  <img src="assets/screenshots/nutrition.jpeg" width="44%" alt="حالتي Nutrition screen" />
+</p>
 
 The requirement analysis behind this flow is documented in the **[Nutrition Logging Case Study →](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)**.
 
@@ -68,12 +78,32 @@ The requirement analysis behind this flow is documented in the **[Nutrition Logg
 Training connects plans, today's session, set logging, progression, and muscle-recovery context. It is intentionally connected back to recovery rather than behaving as a completely separate workout tracker.
 
 <p align="center">
-  <img src="assets/screenshots/training.jpg" width="44%" alt="حالتي Training home" />
+  <img src="assets/screenshots/training-overview.jpeg" width="42%" alt="حالتي Training overview" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/muscle-recovery.jpeg" width="42%" alt="حالتي Muscle recovery screen" />
+</p>
+<p align="center"><sub>Training execution and muscle-recovery context are designed as parts of the same decision loop.</sub></p>
+
+### Progress & timeline
+
+The timeline connects what was planned with what actually happened, while body composition and longer-term views help the user follow change beyond a single day.
+
+<p align="center">
+  <img src="assets/screenshots/timeline.jpeg" width="42%" alt="حالتي Timeline screen" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/body-composition.jpeg" width="42%" alt="حالتي Body composition screen" />
 </p>
 
-### Progress, goals & follow-up
+### Coaching & controlled follow-up
 
-Longer-term areas connect daily behavior to what changes over time: body composition, goals, trends, reports, and timeline views. Permission-based sharing is designed to let selected context move with the user when a friend, coach, or trainer needs visibility — without making every health detail public by default.
+When the user chooses to share relevant information, the product can support a more practical coach/trainer workflow rather than relying on scattered screenshots and messages. The design includes training-focused follow-up and the ability to manage workout context for shared profiles.
+
+<p align="center">
+  <img src="assets/screenshots/coach-training.jpeg" width="42%" alt="حالتي Coach training screen" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/friend-workout-edit.jpeg" width="42%" alt="حالتي Friend workout editing screen" />
+</p>
+<p align="center"><sub>Selected sharing is permission-aware; the goal is useful follow-up, not making health data public by default.</sub></p>
 
 ---
 
@@ -221,6 +251,6 @@ Additional technical documentation is available without making the main portfoli
 
 ## Current state
 
-حالتي is an **active independent pre-launch product**. The current build includes working and evolving experiences across daily health, sleep, recovery, daily load, nutrition, training, progress, reports, onboarding, and Apple Health integration.
+حالتي is an **active independent pre-launch product**. The current build includes working and evolving experiences across daily health, sleep, recovery, daily load, nutrition, training, progress, reports, onboarding, sharing/coaching flows, and Apple Health integration.
 
 The current focus is improving consistency, data reliability, and the experience of moving between those areas as **one coherent health-tracking product**.
