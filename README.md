@@ -103,7 +103,7 @@ Problem
   → Review / iteration
 ```
 
-The full requirement set, acceptance criteria, prioritization, and traceability are documented in the **[Business Analysis Case Study](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)**.
+The full requirement set, acceptance criteria, prioritization, traceability, and validation targets are documented in the **[Business Analysis Case Study](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)**.
 
 ---
 
@@ -156,9 +156,7 @@ flowchart LR
     G --> H[Audit and iterate]
 ```
 
-The project-delivery case study covers **scope, prioritization, dependencies, risks/issues, and an example delivery cycle** without presenting an independent project as formal people-management experience.
-
-**[Project Delivery Case Study →](docs/PROJECT-DELIVERY-CASE-STUDY.md)**
+The **[Project Delivery Case Study](docs/PROJECT-DELIVERY-CASE-STUDY.md)** shows how scope, priorities, dependencies, risks/issues, and delivery cycles are organized across the product.
 
 ---
 
