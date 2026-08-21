@@ -1,8 +1,8 @@
 # System Architecture
 
-This document describes the current high-level architecture of **Halaty** without exposing the private production repository.
+This document summarizes the current high-level architecture of **حالتي** for technical review.
 
-The implementation is an iOS-focused React Native / Expo application with a local-first data model, Apple Health integration, domain scoring engines, and Supabase cloud services.
+The application is iOS-focused and built with React Native / Expo, a local-first data model, Apple Health integration, domain scoring logic, and Supabase cloud services.
 
 ## Stack
 
@@ -11,7 +11,7 @@ The implementation is an iOS-focused React Native / Expo application with a loca
 | Mobile | Expo SDK 56 · React Native 0.85 · React 19 · TypeScript |
 | Routing | Expo Router |
 | Local state | Zustand |
-| Local persistence | MMKV, with native secure-key storage |
+| Local persistence | MMKV with native secure-key storage |
 | Health data | Apple Health / HealthKit |
 | Cloud | Supabase Postgres · Auth · Storage · Edge Functions |
 | Observability | Sentry |
@@ -29,38 +29,32 @@ flowchart TB
     DOMAIN --> SCORE[Scoring engines\nSleep · Recovery · Activity · Strain · Bio Age]
     SCORE --> INTEL[Intelligence / guidance layer]
 
-    DOMAIN --> LOCAL[(Encrypted local MMKV)]
+    DOMAIN --> LOCAL[(Local MMKV)]
     LOCAL --> UI[React Native feature layer]
     SCORE --> UI
     INTEL --> UI
 
-    LOCAL --> SYNC[Local-first sync seam]
-    SYNC --> SB[(Supabase Postgres)]
-    SB --> SYNC
-
+    LOCAL <--> SYNC[Sync layer]
+    SYNC <--> SB[(Supabase Postgres)]
     SB --> EDGE[Supabase Edge Functions]
-    EDGE --> EXT[External services\nAI · USDA · account workflows]
 
     UI <--> WATCH[Apple Watch targets]
 ```
 
 ## Why local-first
 
-The mobile experience is designed so that a network connection is not the primary source of truth for everyday interaction.
+Daily interaction should not depend entirely on network availability.
 
-A user action is persisted locally first. Cloud synchronization is a secondary concern rather than a blocking dependency. This has several product and engineering benefits:
+A user action is persisted locally first, while cloud synchronization is handled as a separate concern. This supports:
 
 - fast UI response;
 - useful offline behavior;
-- health data remains available even during cloud outages;
-- cloud failures can be retried without pretending the local action never happened;
-- the app can keep cloud and product logic separated.
-
-The current private implementation routes cloud-capable repositories through a Supabase data seam only when a configured Supabase session exists. Local/guest operation can continue without it.
+- retries when cloud operations fail;
+- clearer separation between product logic and cloud transport.
 
 ## Domain boundaries
 
-The private source is structured around domain logic rather than putting business rules inside screens.
+The codebase is organized so domain rules are separated from screen components.
 
 ```text
 src/
@@ -83,7 +77,7 @@ src/
 └── i18n/            Arabic/English resources
 ```
 
-The goal is that a score, target, or domain rule can be tested without rendering a React Native screen.
+The practical benefit is that a score, target, or domain rule can be reviewed and tested independently from a rendered screen.
 
 ## Health data flow
 
@@ -98,7 +92,7 @@ sequenceDiagram
 
     HK->>H: sleep / HRV / RHR / activity / workouts
     H->>H: normalize sources and features
-    H->>L: persist DailyRecord / workout data
+    H->>L: persist daily records
     L->>S: historical records + baselines
     S->>S: compute derived scores
     S->>I: score snapshot + confidence context
@@ -106,60 +100,43 @@ sequenceDiagram
     S->>U: score + components + missing-data state
 ```
 
-A key rule is **no invented health values**. Missing inputs remain missing. The UI can display a learning/insufficient-data state instead of synthesizing a number.
+A key product rule is **missing is not zero**. If an input is unavailable, the experience can show a learning or insufficient-data state instead of inventing a value.
 
 ## Mobile ↔ cloud flow
-
-The current Supabase integration uses:
-
-- a typed client based on generated database types;
-- a publishable client key only — no service-role key in the app;
-- persistent native auth sessions;
-- Row Level Security for user-owned records;
-- guarded server-side document write/delete RPCs for synchronized data;
-- durable deletion tombstones and version-aware conflict handling;
-- Edge Functions for operations that should not run with privileged secrets in the mobile client.
 
 ```mermaid
 flowchart LR
     A[Feature action] --> B[Repository]
     B --> C[(Local MMKV)]
-    B --> D{Authenticated cloud?}
-    D -- no --> E[Local-only completion]
-    D -- yes --> F[Supabase data adapter]
-    F --> G[Guarded RPC / RLS]
+    B --> D{Cloud session available?}
+    D -- no --> E[Local completion]
+    D -- yes --> F[Supabase adapter]
+    F --> G[RLS / guarded server operation]
     G --> H[(Postgres)]
-    G -->|transport failure| Q[Retry / sync handling]
 ```
+
+The Supabase layer uses typed client boundaries, authenticated sessions, Row Level Security, and server-side functions where privileged operations are required.
 
 ## Apple Watch
 
-The project includes native Watch targets alongside the React Native application. The Watch experience is intentionally narrower than the phone app: daily state and training/session interactions are the primary use cases.
+The Watch experience is intentionally narrower than the phone application. Its primary use cases are daily-state visibility and training/session interaction.
 
-The phone/watch boundary is treated as a delivery problem rather than assuming live connectivity is always available. Commands and snapshots are designed to tolerate delayed delivery when appropriate.
+The phone/watch boundary is designed around the possibility of delayed delivery rather than assuming permanent live connectivity.
 
 ## Architecture principles
 
-1. **Domain logic outside UI.** Screens consume contracts; they do not redefine the scoring system.
-2. **Local-first interaction.** Cloud availability should not determine whether basic app interactions work.
-3. **Derived data is not raw data.** Health summaries can be surfaced without unnecessarily transporting raw sample streams.
-4. **Missing is not zero.** An absent measurement is not silently converted into a valid value.
-5. **Personal baselines before population norms.** Recovery-related metrics are interpreted against the user's own historical baseline where possible.
-6. **Cloud privilege stays server-side.** Sensitive service credentials belong in server/Edge Function environments, not the iOS bundle.
-7. **Arabic is architectural.** RTL, terminology, hierarchy, and search behavior are considered from the product structure—not applied as a translation pass.
+1. **Domain logic outside UI** — screens consume domain contracts instead of redefining rules.
+2. **Local-first interaction** — basic use should remain useful when the network is unavailable.
+3. **Missing is not zero** — unavailable measurements remain unavailable.
+4. **Personal baselines where appropriate** — recovery-related signals are interpreted against the user’s own history.
+5. **Server-side privilege boundaries** — privileged operations stay outside the mobile bundle.
+6. **Arabic is part of the product structure** — RTL, terminology, hierarchy, and search behavior are considered from the start.
 
-## Private implementation references
+## Related documents
 
-For a technical reviewer discussing the project with me, the private implementation is organized around paths such as:
-
-- `src/core/scoring/*`
-- `src/core/health/*`
-- `src/core/nutrition/*`
-- `src/core/workouts/*`
-- `src/data/repositories.ts`
-- `src/data/supabase/*`
-- `supabase/migrations/*`
-- `supabase/functions/*`
-- `targets/watch/*`
-
-The production source remains private; this showcase exposes architecture and selected implementation logic without publishing credentials or the entire commercial codebase.
+- [Business Analysis Case Study](BUSINESS-ANALYSIS-CASE-STUDY.md)
+- [Project Delivery Case Study](PROJECT-DELIVERY-CASE-STUDY.md)
+- [Product & UX Design](PRODUCT-DESIGN.md)
+- [Backend & Data](BACKEND-AND-DATA.md)
+- [Core Algorithms](CORE-ALGORITHMS.md)
+- [Quality & Testing](QUALITY-AND-TESTING.md)
