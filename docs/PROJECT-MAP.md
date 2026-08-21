@@ -2,7 +2,7 @@
 
 This map helps a technical reviewer understand **where responsibilities live** in the حالتي application.
 
-## Top-level source structure
+## Selected top-level source structure
 
 ```text
 src/
@@ -12,9 +12,10 @@ src/
 ├── intelligence/        higher-level interpretation and guidance
 ├── data/                models, local persistence and cloud adapters
 ├── state/               Zustand stores
-├── design/ + ui/        tokens and shared primitives
+├── design2/ + ui2/      tokens and shared UI primitives
 ├── i18n/                Arabic/English resources
 ├── billing/             premium/entitlement behavior
+├── server/              server-facing application helpers
 └── utils/               dates, formatting and shared helpers
 
 supabase/
@@ -23,7 +24,8 @@ supabase/
 
 targets/
 ├── watch/               Apple Watch application target
-└── watch-widget/        watch/widget shared surfaces
+├── watch-widget/        watch/widget shared surfaces
+└── rest-widget/         rest-timer / Live Activity surface
 ```
 
 ## Product area → implementation backbone
@@ -120,7 +122,7 @@ reports + recovery context
 ```text
 src/data/repositories.ts
         ↓
-src/data/local*         ← local-first persistence
+local persistence
         ↓
 src/data/supabase/
   client
