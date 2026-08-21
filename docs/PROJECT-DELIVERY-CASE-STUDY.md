@@ -153,7 +153,7 @@ The repository provides multiple forms of evidence rather than a single feature 
 
 ## What this case demonstrates
 
-From a project-coordination perspective, this project demonstrates:
+This case demonstrates:
 
 - scope breakdown;
 - workstream organization;
@@ -161,7 +161,8 @@ From a project-coordination perspective, this project demonstrates:
 - dependency awareness;
 - risk/issue thinking;
 - iterative delivery;
-- cross-functional product/technical communication;
+- cross-domain coordination;
+- translating product needs into concrete UX and technical work;
 - review of outcomes rather than only task completion.
 
 The focus is on the **planning and delivery decisions used to move a broad independent product from idea to a working pre-launch build**.
