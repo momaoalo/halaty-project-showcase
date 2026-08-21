@@ -81,22 +81,22 @@ Training home
 
 Training is intentionally connected to recovery context rather than treated as a completely separate mini-product.
 
-## Arabic-first design
+## Arabic & English experience
 
-Arabic support is not treated as a final translation task.
+The product supports both Arabic and English. Localization is treated as part of interface design rather than as a final text-replacement step.
 
-It affects:
+That includes:
 
-- RTL hierarchy and directional controls;
-- typography;
+- RTL/LTR hierarchy and directional controls;
+- typography and spacing behavior;
 - terminology choices;
-- number/unit presentation;
+- number and unit presentation;
 - date and calendar behavior;
-- search behavior for Arabic food names;
+- search behavior across Arabic and English terms;
 - card alignment and visual scanning order;
-- mixed Arabic/English values such as HRV and VO₂max.
+- mixed-language values such as HRV and VO₂max.
 
-The objective is for Arabic to feel native to the product structure rather than added after the interface is complete.
+The objective is for either language to feel intentional within the same product structure.
 
 ## Design-system approach
 
@@ -195,7 +195,7 @@ Recurring review questions include:
 - Is this screen answering one clear question?
 - What can be removed from the first view?
 - What belongs behind a drill-down?
-- Does Arabic feel native or merely translated?
+- Do language, direction, and terminology feel natural in both Arabic and English?
 - Is a missing value being presented honestly?
 - Is the same concept implemented consistently in other domains?
 - How many actions does a frequent user repeat every day?
