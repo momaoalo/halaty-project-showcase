@@ -1,19 +1,19 @@
 # Backend & Data Architecture
 
-Halaty uses a **local-first mobile architecture** with Supabase as the current cloud backend.
+حالتي uses a **local-first mobile architecture** with Supabase as the cloud backend.
 
-The purpose of the cloud layer is not to make every screen dependent on a server round-trip. The mobile app keeps a local working copy and synchronizes eligible data to the cloud when an authenticated Supabase session is available.
+The design goal is straightforward: everyday interaction should remain responsive locally, while cloud services handle authentication, synchronization, and server-side operations where needed.
 
 ## Current backend stack
 
-- **Supabase Auth** for authenticated cloud identity
+- **Supabase Auth** for authenticated identity
 - **Supabase Postgres** for synchronized user data
-- **Row Level Security (RLS)** for user-owned rows
-- **Supabase Storage** for cloud file workflows where explicitly supported
-- **Supabase Edge Functions** for privileged/server-side operations
+- **Row Level Security (RLS)** for user-owned records
+- **Supabase Storage** for supported file workflows
+- **Supabase Edge Functions** for server-side operations
 - **Generated TypeScript database types** for the mobile client
 - **MMKV** for fast local persistence
-- **SecureStore-backed key handling** for native local-store protection
+- secure native key handling for protected local storage
 
 ## Local-first repository model
 
@@ -21,112 +21,71 @@ The purpose of the cloud layer is not to make every screen dependent on a server
 flowchart LR
     UI[Feature / screen] --> R[Repository layer]
     R --> L[(Local MMKV)]
-    R --> C{Cloud enabled?}
+    R --> C{Cloud session available?}
     C -- No --> DONE[Local completion]
     C -- Yes --> A[Supabase adapter]
-    A --> RPC[Guarded RPC / RLS]
-    RPC --> PG[(Postgres)]
+    A --> G[RLS / guarded operation]
+    G --> PG[(Postgres)]
 ```
 
-The local write is the primary interaction path. The cloud copy is synchronized through a separate adapter.
+This separation allows the same product feature to support local use, temporary offline behavior, authenticated synchronization, and test scenarios without forcing every screen to depend directly on the backend.
 
-That separation lets the same domain feature work in:
+## Authentication and client boundary
 
-- authenticated cloud mode;
-- temporary offline mode;
-- guest/local-only mode;
-- tests without a live backend.
+The mobile application uses a typed Supabase client and persistent native auth sessions.
 
-## Supabase client boundary
+Key implementation principles include:
 
-The private mobile client creates a typed Supabase client only when the backend is configured.
+- client-safe publishable credentials in the application;
+- authenticated session persistence;
+- automatic token refresh;
+- PKCE-based native OAuth where required;
+- privileged operations handled through server-side boundaries rather than the mobile client.
 
-Important constraints in the implementation:
+## Conflict-aware synchronization
 
-- the app uses a **publishable/anon client key**, not a service-role key;
-- auth sessions persist locally;
-- token refresh is automatic;
-- native OAuth uses PKCE where required;
-- privileged operations are pushed to RPCs or Edge Functions.
-
-Private source references:
-
-```text
-src/data/supabase/client.ts
-src/data/supabase/config.ts
-src/data/supabase/authBridge.ts
-src/data/supabase/database.types.ts
-```
-
-## Conflict-aware writes
-
-Synchronized document writes do not rely on an unconditional client-side upsert for all domain records.
-
-The current backend adapter can route writes through guarded Postgres RPCs that compare a client's base version with the stored version.
+Synchronized records can pass through guarded write logic instead of relying only on unconditional client-side overwrite behavior.
 
 Conceptually:
 
 ```mermaid
 sequenceDiagram
     participant M as Mobile
-    participant R as RPC
+    participant R as Server operation
     participant D as Postgres
 
-    M->>R: put(document, baseVersion)
-    R->>D: read current version
-    alt version accepted
-        R->>D: write next version
-        R-->>M: accepted
+    M->>R: write(record, baseVersion)
+    R->>D: compare current version
+    alt accepted
+        R->>D: store next version
+        R-->>M: success
     else stale client
-        R-->>M: stale / conflict verdict
+        R-->>M: conflict / retry decision
     end
 ```
 
-Deletes can create durable tombstone semantics so that a late write from another device does not casually resurrect data that has already been deleted.
-
-This is implemented behind the repository/cloud seam rather than duplicated across feature screens.
-
-Private source: `src/data/supabase/dataBackend.ts` and conflict-policy modules.
+The purpose is to reduce accidental overwrites when data may be updated from more than one state or device.
 
 ## Row Level Security
 
-The cloud model is designed around the idea that mobile clients should not receive broad database privileges merely because the user is authenticated.
+User-facing cloud records are protected with RLS policies so authentication alone does not imply unrestricted database access.
 
-User-facing tables are protected with RLS policies and production smoke checks are part of the repository tooling.
-
-The private codebase includes commands for:
-
-```text
-rules:check
-rls:production-smoke
-release:gate
-```
-
-The intention is to verify that schema/policy assumptions used by the app still match the deployed backend before release.
+This is treated as a system requirement rather than only a UI concern because a correct-looking screen does not prove that backend authorization is correct.
 
 ## Edge Functions
 
 Current server-side function areas include workflows such as:
 
-| Function area | Why server-side |
+| Function area | Purpose |
 | --- | --- |
-| AI gateway | keep provider secrets and request policy outside the mobile bundle |
-| USDA search proxy | protect upstream credentials, centralize caching/rate handling |
-| Account deletion | privileged account/data cleanup workflow |
-| Shared snapshot publishing | validate and control externally visible user data |
-
-Private paths include:
-
-```text
-supabase/functions/ai/
-supabase/functions/usda-search/
-supabase/functions/delete-account/
-supabase/functions/publish-snapshots/
-```
+| AI gateway | route provider requests through a controlled server boundary |
+| USDA search proxy | centralize external food-search integration |
+| Account deletion | coordinate account/data cleanup |
+| Shared snapshots | validate data before controlled sharing |
 
 ## Nutrition data sources
 
-Nutrition combines multiple source classes because no single database is ideal for every food workflow.
+Nutrition uses more than one source because generic foods, packaged foods, and user-created foods have different data needs.
 
 ```mermaid
 flowchart LR
@@ -141,51 +100,36 @@ flowchart LR
     I --> N
 ```
 
-The product tracks source/confidence metadata. Missing micronutrients are treated as unknown rather than automatically converted to zero.
+Source context and missing nutrition fields are handled explicitly where they affect reliability.
 
-## Health-data privacy boundary
+## Health-data boundary
 
-Raw HealthKit streams and derived summaries are not treated as equivalent data.
+Raw health samples and derived summaries are treated differently.
 
-The architecture prefers exposing derived values such as:
+For many product surfaces, the useful output is a derived value such as a daily score, workout duration, heart-rate summary, or trend rather than an unnecessary copy of raw sample streams.
 
-- daily scores;
-- workout duration;
-- average/max heart rate;
-- trend summaries;
-
-without unnecessarily publishing raw sample arrays or local-only file URIs to sharing/cloud surfaces.
-
-This is especially important in report export and friend-sharing flows.
+This separation supports clearer privacy and sharing boundaries.
 
 ## Local data protection
 
-On native builds, the app attempts to open the persisted MMKV store with a device-protected encryption key stored through the platform secure store.
-
-A notable design decision is **fail closed** behavior: if the protected key is unavailable or the encrypted store cannot be opened safely, the intended fallback is non-persistent memory rather than silently persisting sensitive health data as plaintext.
+Persisted native data is designed to use device-protected key handling. If protected persistence is unavailable, the safer behavior is to avoid silently falling back to unprotected storage.
 
 ## Account deletion
 
-Account deletion is treated as a real backend operation rather than only clearing the local screen state.
+Account deletion is treated as an end-to-end operation:
 
-The workflow separates:
+1. remove eligible cloud data;
+2. complete the account-level backend operation;
+3. clear local device state after the backend step succeeds.
 
-1. user-owned cloud data cleanup;
-2. privileged auth-account deletion;
-3. local-device cleanup after the backend operation succeeds.
+## Why this matters for the product
 
-This matters because deleting the local cache alone would leave the user's cloud account and records behind.
+These backend decisions are useful to the portfolio because they show how product requirements translate into system behavior:
 
-## What is intentionally not public
+- **offline usability** → local-first interaction;
+- **multi-device consistency** → synchronization and conflict handling;
+- **user privacy** → RLS and data boundaries;
+- **food-data reliability** → multiple normalized sources;
+- **account lifecycle** → coordinated deletion instead of only clearing the screen.
 
-This showcase does **not** publish:
-
-- live database credentials;
-- service-role secrets;
-- production URLs that do not need to be public;
-- the complete SQL schema/migration history;
-- full authorization policies;
-- production AI prompts or private business logic;
-- private user data.
-
-The goal is to show the engineering model without turning a portfolio repository into a security liability.
+The focus of this document is the **system design and requirement-to-implementation relationship**, not backend code volume.
