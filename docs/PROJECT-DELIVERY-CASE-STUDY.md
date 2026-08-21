@@ -164,4 +164,4 @@ From a project-coordination perspective, this project demonstrates:
 - cross-functional product/technical communication;
 - review of outcomes rather than only task completion.
 
-The project is an independent product build, so this case focuses on **planning and delivery decisions** rather than claiming formal people-management or PMO authority that was not part of the project.
+The focus is on the **planning and delivery decisions used to move a broad independent product from idea to a working pre-launch build**.
