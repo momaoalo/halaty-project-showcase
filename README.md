@@ -4,54 +4,89 @@
 
 # حالتي
 
-### Arabic-first personal health app for iOS
+### One connected view of your health day
 
-**Sleep · Recovery · Strain · Nutrition · Training · Progress — brought together in one daily experience**
+**Sleep · Recovery · Daily Load · Nutrition · Training · Progress — connected in one experience**
 
-`Pre-launch` · `React Native / Expo` · `HealthKit` · `Supabase` · `Arabic / English`
+`Pre-launch` · `iOS` · `React Native / Expo` · `HealthKit` · `Supabase`
 
 </div>
 
 ---
 
-## Overview
+## The product idea
 
-**حالتي** is a personal health application designed around a simple product challenge: people often use separate tools for sleep/recovery, nutrition, workouts, and progress, then have to interpret the pieces themselves.
+Health tracking is often fragmented: sleep and recovery in one place, nutrition in another, workouts somewhere else, and progress tracked separately.
 
-The product brings those areas into one experience built around three questions:
+**حالتي** brings those parts together so the user can follow their health day as **one connected picture** instead of moving between separate trackers and interpreting each area in isolation.
 
-> **How am I today? Why? What should I do next?**
+The experience is organized around three practical questions:
+
+> **How am I today? What is driving that state? What should I do next?**
+
+When the user chooses to share relevant information, the same connected view can also make follow-up easier for a **coach or trainer** by keeping training, recovery, nutrition, and progress in context rather than as separate updates.
 
 This repository is a public **product portfolio and case study** for the current pre-launch build.
 
 **My direct focus:** requirements, prioritization, UX review, testing, product decisions, and evaluating the implemented experience.
 
+<p align="center">
+  <img src="assets/screenshots/home.jpg" width="48%" alt="حالتي Today screen showing a connected daily health view" />
+</p>
+<p align="center"><sub><b>Today</b> — the daily entry point brings the main signals together before the user drills into detail.</sub></p>
+
 ---
 
-## Product preview
+## How the experience connects the day
+
+The product is not designed as a collection of unrelated mini-apps. Each area answers a different part of the same daily health story.
+
+### Sleep
+
+Sleep starts with a clear headline state, then lets the user inspect duration, consistency, sleep need, stages, interruptions, history, and methodology when more detail is useful.
 
 <p align="center">
-  <img src="assets/screenshots/gallery-01.jpeg" width="29%" alt="حالتي current-build screen" />
-  &nbsp;&nbsp;
-  <img src="assets/screenshots/gallery-02.jpeg" width="29%" alt="حالتي current-build screen" />
-  &nbsp;&nbsp;
-  <img src="assets/screenshots/gallery-03.jpeg" width="29%" alt="حالتي current-build screen" />
+  <img src="assets/screenshots/sleep.jpg" width="44%" alt="حالتي Sleep overview" />
 </p>
 
-<p align="center"><sub>Selected screens from the current Arabic-first pre-launch build.</sub></p>
+### Recovery
+
+Recovery interprets signals such as HRV, resting heart rate, sleep, and recent load against the user's own history. The goal is not only to show a score, but to explain **why the user is in that state today**.
+
+<p align="center">
+  <img src="assets/screenshots/recovery.jpg" width="44%" alt="حالتي Recovery overview" />
+</p>
+
+### Nutrition
+
+Nutrition is designed around a high-frequency task: logging food without turning every meal into a long transaction. Search, serving size × quantity, quick/recent/saved logging, barcode support, and immediate daily totals are treated as one connected flow.
+
+The requirement analysis behind this flow is documented in the **[Nutrition Logging Case Study →](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)**.
+
+### Training
+
+Training connects plans, today's session, set logging, progression, and muscle-recovery context. It is intentionally connected back to recovery rather than behaving as a completely separate workout tracker.
+
+<p align="center">
+  <img src="assets/screenshots/training.jpg" width="44%" alt="حالتي Training home" />
+</p>
+
+### Progress, goals & follow-up
+
+Longer-term areas connect daily behavior to what changes over time: body composition, goals, trends, reports, and timeline views. Permission-based sharing is designed to let selected context move with the user when a friend, coach, or trainer needs visibility — without making every health detail public by default.
 
 ---
 
 ## Project evidence
 
-The repository documents not only what the application contains, but also how problems were analyzed, decisions were made, and work was organized.
+This repository documents not only what the application contains, but also how problems were analyzed, decisions were made, and work was organized.
 
 | Area | Evidence |
 | --- | --- |
 | **Requirements & process analysis** | problem framing, user needs, requirements, user stories, acceptance criteria, prioritization, traceability |
 | **Planning & delivery** | scope breakdown, workstreams, dependencies, risks/issues, prioritization, iterative delivery |
 | **Product decisions & prioritization** | alternatives, trade-offs, feature decisions, sequencing, review and iteration |
-| **Product & UX thinking** | user flows, friction reduction, information hierarchy, Arabic-first interaction design |
+| **Product & UX thinking** | user flows, friction reduction, information hierarchy, bilingual/RTL-aware interaction design |
 | **Systems & technical context** | data flows, local/cloud boundaries, HealthKit integration, architecture documentation |
 | **Testing & quality** | functional review, missing-data behavior, quality gates and release checks |
 
@@ -80,16 +115,16 @@ I have worked across the project by:
 - comparing different product approaches before choosing an implementation direction;
 - prioritizing improvements based on correctness, user value, and repeated-use friction;
 - testing real flows and iterating when the result did not match the intended experience;
-- shaping Arabic-first navigation, hierarchy, and terminology;
+- reviewing Arabic/English hierarchy, terminology, and RTL/LTR behavior;
 - keeping decisions consistent across health, nutrition, training, and progress areas.
 
 The technical sections document the current implemented system. My direct hands-on focus is the **requirements, product experience, front-end review, testing, prioritization, and evaluation of the implemented result**.
 
 ---
 
-## A concrete example: nutrition logging
+## A concrete analysis example: nutrition logging
 
-A feature list does not show how a requirement was reached. The nutrition flow is one example of the analysis process.
+A feature list does not show how a requirement was reached. Nutrition logging is one example of the analysis process.
 
 **Problem:** food logging is repeated several times a day, so unnecessary steps create friction.
 
@@ -123,35 +158,19 @@ A recurring design decision is:
 | **2** | Why? | contributing measurements and context |
 | **3** | What changed? | history, trends, and deeper analysis |
 
-This structure is reused across sleep, recovery, strain, nutrition, and training so the product can support both a quick daily check and deeper inspection.
+This structure helps the different health areas feel connected while still supporting users who want deeper inspection.
 
 The alternatives and trade-offs behind this choice are documented in the **[decision case study](docs/DECISION-CASE-STUDY.md)**.
 
 ---
 
-## Core product areas
-
-| Area | Purpose |
-| --- | --- |
-| **Today** | turn multiple signals into one understandable daily state |
-| **Sleep** | show sleep quality, duration, consistency, and deeper context |
-| **Recovery** | interpret HRV, resting heart rate, sleep, and recent load against personal history |
-| **Strain** | represent accumulated physical load separately from recovery |
-| **Nutrition** | make food logging faster through search, barcode, saved meals, and quick repeat actions |
-| **Training** | connect plans, sessions, progression, and muscle-recovery context |
-| **Body & Progress** | track weight, body composition, goals, and longer-term changes |
-| **Timeline & Reports** | connect planned activities with what actually happened and show trends over time |
-| **Friends / Coaching** | support controlled sharing and contextual guidance |
-
----
-
 ## Planning & delivery
 
-Because حالتي spans several domains, the work is organized as connected workstreams rather than one long feature list:
+Because حالتي spans several connected domains, the work is organized as workstreams rather than one long feature list:
 
 ```mermaid
 flowchart LR
-    A[Core health] --> E[Cross-product consistency]
+    A[Core health] --> E[Connected experience]
     B[Nutrition] --> E
     C[Training] --> E
     D[Platform] --> E
@@ -173,7 +192,7 @@ The current application uses:
 - **MMKV** for local-first persistence;
 - **Supabase** for authentication, database, and cloud synchronization;
 - **TypeScript** across the application;
-- an Arabic/English interface with RTL/LTR support.
+- **Arabic and English** interfaces with RTL/LTR support.
 
 At a high level, the application separates health-data ingestion, domain logic, local storage, synchronization, and presentation.
 
@@ -202,36 +221,6 @@ Additional technical documentation is available without making the main portfoli
 
 ## Current state
 
-حالتي is an **active independent pre-launch product**. The current build includes working and evolving experiences across daily health, sleep, recovery, strain, nutrition, training, progress, reports, onboarding, and Apple Health integration.
+حالتي is an **active independent pre-launch product**. The current build includes working and evolving experiences across daily health, sleep, recovery, daily load, nutrition, training, progress, reports, onboarding, and Apple Health integration.
 
-The current focus is improving consistency, data reliability, and the experience of moving between the different health domains as one coherent product.
-
----
-
-<details>
-<summary><strong>View current-build screenshot gallery</strong></summary>
-
-<br />
-
-<p align="center">
-  <img src="assets/screenshots/gallery-01.jpeg" width="30%" alt="حالتي screen 1" />
-  <img src="assets/screenshots/gallery-02.jpeg" width="30%" alt="حالتي screen 2" />
-  <img src="assets/screenshots/gallery-03.jpeg" width="30%" alt="حالتي screen 3" />
-</p>
-<p align="center">
-  <img src="assets/screenshots/gallery-04.jpeg" width="30%" alt="حالتي screen 4" />
-  <img src="assets/screenshots/gallery-05.jpeg" width="30%" alt="حالتي screen 5" />
-  <img src="assets/screenshots/gallery-06.jpeg" width="30%" alt="حالتي screen 6" />
-</p>
-<p align="center">
-  <img src="assets/screenshots/gallery-07.jpeg" width="30%" alt="حالتي screen 7" />
-  <img src="assets/screenshots/gallery-08.jpeg" width="30%" alt="حالتي screen 8" />
-  <img src="assets/screenshots/gallery-09.jpeg" width="30%" alt="حالتي screen 9" />
-</p>
-<p align="center">
-  <img src="assets/screenshots/gallery-10.jpeg" width="30%" alt="حالتي screen 10" />
-  <img src="assets/screenshots/gallery-11.jpeg" width="30%" alt="حالتي screen 11" />
-  <img src="assets/screenshots/gallery-12.jpeg" width="30%" alt="حالتي screen 12" />
-</p>
-
-</details>
+The current focus is improving consistency, data reliability, and the experience of moving between those areas as **one coherent health-tracking product**.
