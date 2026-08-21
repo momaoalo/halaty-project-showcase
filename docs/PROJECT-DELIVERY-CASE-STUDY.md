@@ -8,14 +8,16 @@ This case study presents **حالتي** from a project-delivery perspective: sco
 
 ## Objective
 
-Build an Arabic-first iOS health experience that can bring together:
+Build an iOS health experience that brings the user's daily health picture together across:
 
 - daily health signals;
 - sleep and recovery;
 - nutrition logging;
 - training and workout tracking;
 - body/progress tracking;
-- timelines, reports, and selected social/coaching flows.
+- timelines, reports, and selected sharing/coaching flows.
+
+The goal is to make those areas easier to follow as one connected experience rather than as separate trackers.
 
 ## Scope view
 
@@ -27,6 +29,7 @@ Build an Arabic-first iOS health experience that can bring together:
 - cloud synchronization through Supabase;
 - Arabic/English experience;
 - nutrition, training, sleep/recovery, and progress workflows;
+- permission-aware sharing/follow-up context;
 - pre-launch quality and release checks.
 
 ### Not treated as a launch prerequisite
@@ -46,7 +49,7 @@ This distinction is important because breadth can easily become uncontrolled sco
 | **Nutrition** | search, serving/quantity, quick logging, barcode, daily totals |
 | **Training** | plans, sessions, logging, progression, muscle-recovery context |
 | **Progress** | goals, body composition, trends, timeline/reporting |
-| **Experience** | Arabic-first hierarchy, navigation, reusable patterns, consistency |
+| **Experience** | hierarchy, navigation, bilingual/RTL-aware patterns, consistency |
 | **Platform** | local storage, Supabase sync, authentication, quality/release checks |
 
 ## Prioritization approach
@@ -71,7 +74,7 @@ flowchart LR
     A[Foundation] --> B[Core health]
     B --> C[Nutrition]
     B --> D[Training]
-    C --> E[Cross-product consistency]
+    C --> E[Connected experience]
     D --> E
     E --> F[Progress / reports]
     F --> G[Quality & pre-launch readiness]
@@ -143,7 +146,7 @@ See **[Decision Case Study](DECISION-CASE-STUDY.md)**.
 
 The repository provides multiple forms of evidence rather than a single feature list:
 
-- current-build screenshots;
+- current-build screenshots placed with the relevant product flows;
 - product and UX flows;
 - requirement/acceptance-criteria examples;
 - architecture and data-flow diagrams;
