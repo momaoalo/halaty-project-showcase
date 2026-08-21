@@ -40,46 +40,48 @@ This repository is a public **product portfolio and case study** for the current
 
 ---
 
-## What this project demonstrates
+## Project evidence
 
-| Capability | Evidence in this repository |
+The repository documents not only what the application contains, but also how problems were analyzed, decisions were made, and work was organized.
+
+| Area | Evidence |
 | --- | --- |
-| **Business analysis** | problem framing, requirements, user stories, acceptance criteria, prioritization, traceability |
-| **Project coordination** | scope breakdown, workstreams, dependencies, risks/issues, prioritization, iterative delivery |
-| **Product analysis** | feature definition, competitor/product comparison, trade-offs, prioritization, iteration |
-| **UX / process thinking** | user flows, friction reduction, information hierarchy, Arabic-first design |
-| **Systems thinking** | data flows, local/cloud boundaries, HealthKit integration, architecture documentation |
-| **Testing & quality mindset** | functional review, missing-data behavior, automated quality/release checks |
-| **Technical communication** | architecture diagrams, selected implementation logic, documented decisions |
+| **Requirements & process analysis** | problem framing, user needs, requirements, user stories, acceptance criteria, prioritization, traceability |
+| **Planning & delivery** | scope breakdown, workstreams, dependencies, risks/issues, prioritization, iterative delivery |
+| **Product decisions & prioritization** | alternatives, trade-offs, feature decisions, sequencing, review and iteration |
+| **Product & UX thinking** | user flows, friction reduction, information hierarchy, Arabic-first interaction design |
+| **Systems & technical context** | data flows, local/cloud boundaries, HealthKit integration, architecture documentation |
+| **Testing & quality** | functional review, missing-data behavior, quality gates and release checks |
 
-### Review the project from your perspective
+### Selected case studies and documentation
 
-| Perspective | Start here |
+| Topic | Document |
 | --- | --- |
-| **Business Analysis / Requirements** | **[Business Analysis Case Study →](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)** |
-| **Project Coordination / PMO** | **[Project Delivery Case Study →](docs/PROJECT-DELIVERY-CASE-STUDY.md)** |
-| **Product / Decision Making** | **[Decision Case Study →](docs/DECISION-CASE-STUDY.md)** |
-| **Product & UX** | **[Product & UX Design →](docs/PRODUCT-DESIGN.md)** |
-| **Systems / Technical Review** | **[System Architecture →](docs/ARCHITECTURE.md)** |
+| **Requirements & process analysis** | **[Nutrition logging case study →](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)** |
+| **Planning & delivery** | **[Project delivery case study →](docs/PROJECT-DELIVERY-CASE-STUDY.md)** |
+| **Product decisions & trade-offs** | **[Decision case study →](docs/DECISION-CASE-STUDY.md)** |
+| **Product & UX thinking** | **[Product & UX design →](docs/PRODUCT-DESIGN.md)** |
+| **Systems & technical context** | **[System architecture →](docs/ARCHITECTURE.md)** |
 
 ---
 
 ## My contribution
 
-My strongest direct contribution to حالتي is in **product analysis, requirements, product direction, UX, testing, and prioritization**.
+My strongest direct contribution to حالتي is in **requirements, prioritization, UX review, testing, and coordinating decisions across the product**.
 
-I have worked across the product by:
+I have worked across the project by:
 
 - turning broad ideas into clearer requirements and user flows;
 - reviewing implemented screens and identifying usability or functional gaps;
 - simplifying repeated workflows such as food and workout logging;
 - deciding what belongs on a daily summary versus deeper analysis;
-- comparing product approaches and prioritizing improvements;
+- comparing different product approaches before choosing an implementation direction;
+- prioritizing improvements based on correctness, user value, and repeated-use friction;
 - testing real flows and iterating when the result did not match the intended experience;
 - shaping Arabic-first navigation, hierarchy, and terminology;
-- coordinating decisions across health, nutrition, training, and progress areas.
+- keeping decisions consistent across health, nutrition, training, and progress areas.
 
-**Implementation approach:** the application has been developed iteratively with AI-assisted coding. My strongest hands-on area is the **product, requirements, front-end experience, and review of the implemented result**.
+**Implementation approach:** the application has been developed iteratively with AI-assisted coding. My strongest hands-on area is the **requirements, product experience, front-end review, and evaluation of the implemented result**.
 
 ---
 
@@ -103,7 +105,7 @@ Problem
   → Review / iteration
 ```
 
-The full requirement set, acceptance criteria, prioritization, traceability, and validation targets are documented in the **[Business Analysis Case Study](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)**.
+The full requirement set, acceptance criteria, prioritization, traceability, and validation targets are documented in the **[nutrition logging case study](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)**.
 
 ---
 
@@ -121,7 +123,7 @@ A recurring design decision is:
 
 This structure is reused across sleep, recovery, strain, nutrition, and training so the product can support both a quick daily check and deeper inspection.
 
-The alternatives and trade-offs behind this choice are documented in the **[Decision Case Study](docs/DECISION-CASE-STUDY.md)**.
+The alternatives and trade-offs behind this choice are documented in the **[decision case study](docs/DECISION-CASE-STUDY.md)**.
 
 ---
 
@@ -141,9 +143,9 @@ The alternatives and trade-offs behind this choice are documented in the **[Deci
 
 ---
 
-## Project delivery view
+## Planning & delivery
 
-Because حالتي spans several domains, delivery is organized as workstreams rather than one long feature list:
+Because حالتي spans several domains, the work is organized as connected workstreams rather than one long feature list:
 
 ```mermaid
 flowchart LR
@@ -156,7 +158,7 @@ flowchart LR
     G --> H[Audit and iterate]
 ```
 
-The **[Project Delivery Case Study](docs/PROJECT-DELIVERY-CASE-STUDY.md)** shows how scope, priorities, dependencies, risks/issues, and delivery cycles are organized across the product.
+The **[project delivery case study](docs/PROJECT-DELIVERY-CASE-STUDY.md)** documents scope, priorities, dependencies, risks/issues, and an example iteration cycle.
 
 ---
 
@@ -183,7 +185,7 @@ flowchart TB
     SYNC <--> SB[(Supabase)]
 ```
 
-Technical reviewers can go deeper without making the main portfolio page code-heavy:
+Additional technical documentation is available without making the main portfolio page code-heavy:
 
 | Topic | Document |
 | --- | --- |
