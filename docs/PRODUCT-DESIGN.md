@@ -1,22 +1,22 @@
 # Product & UX Design
 
-Halaty is designed around one recurring user question:
+حالتي is designed around one recurring user question:
 
 > **How am I today, why, and what should I do next?**
 
-The product challenge is not simply to show more health data. It is to make multiple domains—sleep, recovery, activity, nutrition, training, and progress—feel like one coherent experience.
+The product challenge is not simply to show more health data. It is to make sleep, recovery, activity, nutrition, training, and progress feel like one coherent experience.
 
 ## Product thesis
 
-Most health-conscious users already have access to many numbers. The problem is fragmentation:
+Health-conscious users can already access many numbers. The problem is often fragmentation:
 
-- wearable data lives in one place;
+- wearable data in one place;
 - food logging in another;
-- workouts in another;
-- progress and body metrics somewhere else;
-- the user is left to interpret how the pieces relate.
+- workouts somewhere else;
+- progress tracked separately;
+- interpretation left to the user.
 
-Halaty's product direction is to connect these domains without making the home experience feel like a dense analytics dashboard.
+حالتي aims to connect those domains without turning the home experience into a dense analytics dashboard.
 
 ## Information architecture
 
@@ -34,10 +34,12 @@ flowchart TD
     L3 --- C[History / trends / detailed analysis]
 ```
 
-This lets the same product serve two very different usage patterns:
+This supports two different usage patterns:
 
-- someone who wants a 10-second daily check;
-- someone who wants to inspect HRV, sleep structure, trends, training load, nutrition, or progress in depth.
+- a user who wants a quick daily check;
+- a user who wants to inspect HRV, sleep structure, trends, training load, nutrition, or progress in depth.
+
+The alternatives and trade-offs behind this structure are documented in the **[Decision Case Study](DECISION-CASE-STUDY.md)**.
 
 ## Core user flows
 
@@ -62,7 +64,9 @@ Nutrition home
   → daily totals update
 ```
 
-The UX goal is to minimize repeated logging friction. Frequently used foods and meals should become faster over time rather than forcing the full workflow every time.
+The UX goal is to reduce repeated logging friction without removing useful detail.
+
+A full requirement-to-flow example is available in the **[Business Analysis Case Study](BUSINESS-ANALYSIS-CASE-STUDY.md)**.
 
 ### Training
 
@@ -75,7 +79,7 @@ Training home
   → progression / recovery context
 ```
 
-Training is not intended to be isolated from recovery. The product direction is that physical preparedness and training decisions should be visible in the same ecosystem.
+Training is intentionally connected to recovery context rather than treated as a completely separate mini-product.
 
 ## Arabic-first design
 
@@ -90,15 +94,13 @@ It affects:
 - date and calendar behavior;
 - search behavior for Arabic food names;
 - card alignment and visual scanning order;
-- mixed Arabic/English technical values such as HRV and VO₂max.
+- mixed Arabic/English values such as HRV and VO₂max.
 
-The private application uses dedicated Arabic/English resources and RTL-aware components rather than maintaining a separate Arabic application.
+The objective is for Arabic to feel native to the product structure rather than added after the interface is complete.
 
 ## Design-system approach
 
-The implementation separates reusable visual primitives from feature-specific screens.
-
-Typical reusable concepts include:
+Reusable concepts include:
 
 - cards;
 - score rings;
@@ -111,7 +113,7 @@ Typical reusable concepts include:
 - date navigation;
 - typography and spacing tokens.
 
-This matters in a large application because the product contains many domains. Without shared primitives, sleep, recovery, nutrition, and training quickly look like separate apps.
+Shared patterns help sleep, recovery, nutrition, training, and progress feel like one product.
 
 ## Product principles
 
@@ -119,28 +121,28 @@ This matters in a large application because the product contains many domains. W
 The user should understand the main state before being asked to interpret detail.
 
 ### 2. Explain the number
-A score without drivers is weak product communication. Where possible, a user can drill into the inputs or context behind a result.
+A score is more useful when the user can understand the main drivers behind it.
 
 ### 3. Do not fake completeness
-If a signal is unavailable, the interface should say that rather than rendering an invented zero or confident-looking substitute.
+If a signal is unavailable, the interface should communicate that rather than render an invented zero or confident-looking substitute.
 
 ### 4. Progressive disclosure
-Advanced information is valuable, but it should appear after the user asks for it.
+Advanced information remains available, but appears after the user asks for it.
 
 ### 5. Reduce repeated work
-Logging experiences should learn from repeated actions through recent/saved patterns and shortcuts.
+Frequently repeated logging tasks should become faster through recent, saved, and shortcut patterns.
 
 ### 6. Keep domains connected
 Nutrition, training, recovery, and progress should not behave like unrelated mini-products.
 
-### 7. Privacy is part of UX
-Friend/coach sharing requires explicit categories and permissions rather than assuming all health information is social.
+### 7. Treat privacy as part of the experience
+Sharing features should make data categories and permissions explicit.
 
-## Example: turning a dense health screen into layers
+## Example: simplifying a dense health screen
 
-A common product problem is that a health score can have too many useful supporting metrics.
+A health score can have many useful supporting metrics.
 
-Instead of showing everything on the first view:
+Instead of placing everything on the first view:
 
 ```text
 Screen 1
@@ -157,13 +159,13 @@ Screen 3
 History + trends + methodology/detail
 ```
 
-The user is not denied depth; depth is simply placed where it can be understood.
+The user is not denied depth; depth is placed where it can be understood.
 
-## Example: data confidence in the interface
+## Example: data confidence
 
-A health app can appear authoritative simply because a number is rendered in large type.
+A large number can appear authoritative even when the underlying data is incomplete.
 
-Halaty treats the following as product states:
+حالتي treats the following as distinct product states:
 
 - enough data;
 - learning a baseline;
@@ -178,8 +180,6 @@ The UI should communicate these states without making the experience feel broken
 
 The product has been developed iteratively rather than from a single frozen specification.
 
-The practical loop is:
-
 ```mermaid
 flowchart LR
     P[Identify problem] --> R[Research / compare approaches]
@@ -190,7 +190,7 @@ flowchart LR
     G --> P
 ```
 
-Examples of recurring review questions:
+Recurring review questions include:
 
 - Is this screen answering one clear question?
 - What can be removed from the first view?
@@ -198,21 +198,15 @@ Examples of recurring review questions:
 - Does Arabic feel native or merely translated?
 - Is a missing value being presented honestly?
 - Is the same concept implemented consistently in other domains?
-- How many taps does the frequent user repeat every day?
-
-## Visual showcase
-
-The repository keeps the full screenshot set under `assets/screenshots/`.
-
-The main README intentionally shows only a small preview. The rest of the screenshots are available in a collapsible gallery so the visual layer supports the case study instead of overwhelming the technical/product narrative.
+- How many actions does a frequent user repeat every day?
 
 ## My contribution
 
-My strongest hands-on contribution is in:
+My strongest direct contribution is in:
 
 - product direction;
 - feature definition and refinement;
-- UX flows;
+- requirements and user flows;
 - screen review;
 - identifying friction and functional gaps;
 - simplifying interactions;
@@ -220,4 +214,4 @@ My strongest hands-on contribution is in:
 - prioritizing improvements;
 - maintaining consistency across a broad product.
 
-The technical architecture is documented in this portfolio because it is part of the real application, but the portfolio does not misrepresent my personal role as backend engineering expertise.
+The implementation has been developed iteratively with AI-assisted coding, while my main hands-on focus is the product, front-end experience, requirements, and review of the implemented result.
