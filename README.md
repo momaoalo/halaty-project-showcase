@@ -1,6 +1,8 @@
 <div align="center">
 
-# Halaty (حالتي)
+<img src="assets/branding/brand-mark.svg" width="150" alt="شعار حالتي" />
+
+# حالتي
 
 ### Arabic-first personal health platform for iOS
 
