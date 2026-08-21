@@ -4,7 +4,7 @@
 
 # حالتي
 
-### Arabic-first personal health platform for iOS
+### Arabic-first personal health app for iOS
 
 **Sleep · Recovery · Strain · Nutrition · Training · Progress — brought together in one daily experience**
 
@@ -67,7 +67,7 @@ The repository documents not only what the application contains, but also how pr
 
 ## My contribution
 
-My strongest direct contribution to حالتي is in **requirements, prioritization, UX review, testing, and coordinating decisions across the product**.
+My strongest direct contribution to حالتي is in **requirements, prioritization, UX review, testing, and keeping decisions consistent across the product**.
 
 I have worked across the project by:
 
@@ -81,7 +81,7 @@ I have worked across the project by:
 - shaping Arabic-first navigation, hierarchy, and terminology;
 - keeping decisions consistent across health, nutrition, training, and progress areas.
 
-**Implementation approach:** the application has been developed iteratively with AI-assisted coding. My strongest hands-on area is the **requirements, product experience, front-end review, and evaluation of the implemented result**.
+The technical sections document the current implemented system. My direct hands-on focus is the **requirements, product experience, front-end review, testing, prioritization, and evaluation of the implemented result**.
 
 ---
 
@@ -200,7 +200,7 @@ Additional technical documentation is available without making the main portfoli
 
 ## Current state
 
-حالتي is an **active pre-launch personal project**. The current build includes working and evolving experiences across daily health, sleep, recovery, strain, nutrition, training, progress, reports, onboarding, and Apple Health integration.
+حالتي is an **active independent pre-launch product**. The current build includes working and evolving experiences across daily health, sleep, recovery, strain, nutrition, training, progress, reports, onboarding, and Apple Health integration.
 
 The current focus is improving consistency, data reliability, and the experience of moving between the different health domains as one coherent product.
 
