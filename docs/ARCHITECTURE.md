@@ -67,14 +67,12 @@ src/
 │   ├── workouts/    plans, sessions, progression, fatigue
 │   ├── body/        composition and progress logic
 │   └── reports/     trends, summaries and export
-├── data/
-│   ├── local        local persistence
-│   ├── repositories repository abstraction
-│   └── supabase/    typed cloud adapter
+├── data/            models, local persistence and cloud adapters
 ├── intelligence/    interpretation / recommendation layer
 ├── state/           Zustand stores
-├── design/ + ui/    design tokens and primitives
-└── i18n/            Arabic/English resources
+├── design2/ + ui2/  design tokens and shared UI primitives
+├── i18n/            Arabic/English resources
+└── server/          server-facing application helpers
 ```
 
 The practical benefit is that a score, target, or domain rule can be reviewed and tested independently from a rendered screen.
