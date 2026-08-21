@@ -1,6 +1,6 @@
 # Project Map
 
-This is a public orientation map for the private Halaty source tree. It helps a technical reviewer understand **where responsibilities live** without exposing the complete commercial repository.
+This map helps a technical reviewer understand **where responsibilities live** in the حالتي application.
 
 ## Top-level source structure
 
@@ -28,7 +28,7 @@ targets/
 
 ## Product area → implementation backbone
 
-| Product area | Primary private modules |
+| Product area | Main implementation areas |
 | --- | --- |
 | Today / daily state | `features/home2/*`, `core/scoring/*`, intelligence layer |
 | Sleep | `core/scoring/sleep.ts`, sleep/recovery helpers, score detail UI |
@@ -39,7 +39,7 @@ targets/
 | Body / progress | `core/body/*`, body feature screens, composition/bio-age logic |
 | Reports | `core/reports/*`, report/trend feature screens |
 | Social / friends | social core + Supabase social backend + permission-aware snapshots |
-| AI / coaching | coach/AI domain modules + server-side AI Edge Function |
+| AI / coaching | coach/AI domain modules + server-side AI function |
 | Apple Health | `core/health/*`, sync/extraction modules |
 | Apple Watch | `targets/watch/*`, phone/watch delivery bridge |
 | Cloud data | `data/supabase/*`, `supabase/migrations/*` |
@@ -59,7 +59,7 @@ src/core/scoring/
 └── engine / snapshot orchestration
 ```
 
-The score engines are intended to be framework-light. React Native UI should consume their result contracts rather than reimplement formulas in components.
+The score engines are kept separate from screen components so UI can consume their result contracts instead of redefining formulas.
 
 ## Health pipeline
 
@@ -97,18 +97,7 @@ meal entry
 daily totals / targets / trend context
 ```
 
-Relevant private modules cover:
-
-- internal food database;
-- Arabic/English search;
-- USDA lookup;
-- Open Food Facts barcode lookup;
-- cache;
-- custom foods;
-- saved/recent meals;
-- serving/portion handling;
-- daily macro/micronutrient summary;
-- target logic.
+Nutrition implementation areas include Arabic/English search, USDA lookup, Open Food Facts barcode lookup, caching, custom foods, saved/recent meals, serving/portion handling, daily summaries, and target logic.
 
 ## Training pipeline
 
@@ -121,12 +110,10 @@ live set logging
   ↓
 WorkoutRecord
   ↓
-PR / progression / fatigue / deload analysis
+progression / fatigue / deload analysis
   ↓
 reports + recovery context
 ```
-
-Training domain modules include exercise definitions, plan generation, session templates, progressive overload, deload suggestions, muscle-fatigue context, and workout import/linking.
 
 ## Cloud architecture map
 
@@ -150,29 +137,15 @@ Supabase Postgres / Auth / Storage
 supabase/functions/*
 ```
 
-## Why show paths if the repository is private?
+## Questions this map helps answer
 
-A technical hiring manager can see that the application has intentional boundaries and can ask precise questions such as:
+A technical reviewer can use this structure to discuss questions such as:
 
 - Why keep scoring outside screens?
-- How does local-first sync behave?
-- How are stale multi-device writes handled?
+- How does local-first synchronization behave?
+- How are stale writes handled?
 - Which data is derived versus raw?
-- Why are Edge Functions used for some integrations?
-- How does a missing HRV measurement flow to the UI?
+- Why are server-side functions used for some integrations?
+- How does a missing health signal reach the UI?
 
-That is more useful than publishing thousands of lines of code with no architecture narrative.
-
-## Public source boundary
-
-This repository intentionally exposes:
-
-- system diagrams;
-- domain formulas;
-- selected implementation excerpts;
-- module paths;
-- design decisions;
-- backend model;
-- quality gates.
-
-It intentionally does not expose the entire private application source or secrets.
+The purpose of this document is orientation: it connects **product areas to system responsibilities** without turning the portfolio into a large code dump.
