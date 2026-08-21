@@ -1,10 +1,10 @@
-# Quality, Testing & Release Engineering
+# Quality, Testing & Release
 
-A portfolio for a real product should show more than screenshots and feature claims. This document summarizes the quality controls present in the private Halaty codebase without publishing the private test suite itself.
+A working screen is not enough to prove that a health-related product behaves correctly. This document summarizes the quality controls used in حالتي.
 
 ## Automated quality commands
 
-The current project exposes dedicated commands for:
+The project exposes dedicated commands for:
 
 ```text
 npm run lint
@@ -20,24 +20,24 @@ npm run release:gate
 npm run appstore:check
 ```
 
-These are separate because they answer different release questions.
-
 | Gate | Purpose |
 | --- | --- |
 | Lint | static code-quality checks |
 | Typecheck | TypeScript contract validation |
 | Tests | domain and feature behavior |
 | Timezone tests | date/day-boundary correctness |
-| Runtime performance baseline | catch major hot-path regressions |
-| Route verification | detect broken/missing application routes |
-| Supabase schema verification | ensure app assumptions match backend schema |
-| Production RLS smoke | verify access-control behavior against a production-like backend |
+| Runtime performance baseline | detect major hot-path regressions |
+| Route verification | detect broken or missing routes |
+| Supabase schema checks | verify application/backend assumptions |
+| RLS smoke checks | verify access-control behavior |
 | Release gate | combine release-critical checks |
 | App Store check | validate packaging/release expectations |
 
-## Why domain tests matter here
+## Why domain tests matter
 
-Health scoring logic is separated from UI, which makes it possible to test behavior such as:
+Health scoring and other domain rules are separated from UI so behavior can be checked independently of screen rendering.
+
+Examples include:
 
 - missing data;
 - baseline changes;
@@ -50,85 +50,62 @@ Health scoring logic is separated from UI, which makes it possible to test behav
 - workout progression/deload rules;
 - privacy-safe export behavior.
 
-A screenshot cannot prove those rules. Tests can.
+## Missing-data behavior
 
-## Example: methodology drift protection
+Missing data is treated as a product state, not only an edge case.
 
-Several scoring modules expose the same curves and weights used by the production engine so methodology screens/tests can consume the implementation rather than retyping a second set of constants.
+Checks are intended to prevent an unavailable signal from becoming:
 
-The objective is to prevent this failure mode:
-
-```text
-UI explanation = old formula
-production engine = new formula
-```
-
-## Missing-data tests
-
-Missing data is a core product rule, not just an edge case.
-
-Tests cover the expectation that an absent signal should not automatically become:
-
-- `0`;
-- a fake score;
-- a fabricated workout detail;
-- a fake nutrition micronutrient;
+- `0` when zero has a different meaning;
+- a fabricated score;
+- invented workout details;
+- fake nutrition micronutrients;
 - a crash caused by an invalid persisted record.
+
+This supports the product principle **missing is not zero**.
 
 ## Runtime validation
 
-High-value persisted records are structurally validated before they are trusted by the domain layer. Invalid records can be skipped/treated as missing instead of being allowed to poison later calculations.
+High-value persisted records are structurally validated before domain logic relies on them. Invalid records can be skipped or treated as missing rather than silently contaminating later calculations.
 
-Migration logic is intentionally conservative: it may repair safe structural metadata, but it should not invent health measurements.
+## Authorization checks
 
-## Backend authorization checks
+The Supabase stack includes RLS verification because UI correctness does not prove backend authorization correctness.
 
-The current cloud stack uses Supabase and includes dedicated RLS verification/smoke tooling.
-
-This matters because a mobile app's UI can look perfectly correct while the backend accidentally allows one user to read or mutate another user's data.
-
-Access control therefore has its own release checks rather than being treated as a manual afterthought.
+Access control is therefore treated as a release concern rather than only a development-time assumption.
 
 ## Privacy checks
 
-Sensitive health applications need checks at data boundaries, especially for:
+Relevant data boundaries include:
 
 - exports;
 - friend/shared snapshots;
 - cloud synchronization;
-- local file URIs;
+- local file references;
 - raw HealthKit sample arrays;
 - progress photos.
 
-The private implementation distinguishes derived summaries from raw data and is designed to reject unsafe payloads before they become public/shareable surfaces.
-
-## Local protection / fail-closed behavior
-
-The native local store attempts to use a device-protected key. The intended security behavior is not "if encryption fails, quietly save plaintext." The safer fallback is non-persistent memory until the issue is resolved.
-
-That is an example of a release decision where preserving confidentiality is more important than silently preserving persistence.
+The application distinguishes derived summaries from raw data so sharing/export surfaces can use the minimum information needed for their purpose.
 
 ## Performance
 
-The project includes a runtime performance baseline command because the Today/Home experience can combine multiple derived domains and historical queries.
+The project includes a runtime performance baseline because daily-summary screens can combine multiple domains and historical calculations.
 
-The objective is to keep heavy domain calculations out of unnecessary re-render loops and make regressions measurable rather than subjective.
+The goal is to make major regressions measurable instead of relying only on visual inspection.
 
-## Release philosophy
+## Release review
 
-A feature is not considered production-ready simply because the screen renders.
+A release-quality review asks:
 
-A release-quality path asks:
-
-1. Does it typecheck?
-2. Does domain behavior still pass tests?
-3. Does the route exist and open?
-4. Does backend authorization still hold?
+1. Does the project typecheck?
+2. Do domain behaviors still pass tests?
+3. Do routes open correctly?
+4. Does backend authorization still behave as intended?
 5. Are privacy boundaries respected?
-6. Does it behave across timezone/day changes?
+6. Does behavior remain correct across timezone/day changes?
 7. Has runtime performance materially regressed?
-8. Does the release configuration pass the final gate?
+8. Does the release configuration pass final checks?
 
-## Public-vs-private boundary
+## What this demonstrates
 
-The test names, architecture, and release approach can be demonstrated publicly. The full private test suite and production environment configuration stay in the private repository.
+From a portfolio perspective, the value of this section is not the number of test files. It demonstrates a **quality mindset**: defining expected behavior, checking edge cases, separating functional correctness from visual completion, and including release risks in the delivery process.
