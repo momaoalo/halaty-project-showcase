@@ -33,19 +33,43 @@ The production source code remains private.
 
 ## Product preview
 
+The screenshots below are from the current pre-launch iOS build and show the breadth of the product across daily health, recovery, sleep, nutrition, training, progress, goals, and deeper insight views.
+
 <p align="center">
-  <img src="assets/screenshots/01-home.jpg" width="30%" alt="Halaty Today screen" />
+  <img src="assets/screenshots/gallery-01.jpeg" width="30%" alt="Halaty product screen 1" />
   &nbsp;
-  <img src="assets/screenshots/04-recovery.jpg" width="30%" alt="Halaty Recovery screen" />
+  <img src="assets/screenshots/gallery-02.jpeg" width="30%" alt="Halaty product screen 2" />
   &nbsp;
-  <img src="assets/screenshots/07-training.jpg" width="30%" alt="Halaty Training screen" />
+  <img src="assets/screenshots/gallery-03.jpeg" width="30%" alt="Halaty product screen 3" />
 </p>
 
 <p align="center">
-  <sub><b>Today</b> — one daily state &nbsp;&nbsp; · &nbsp;&nbsp; <b>Recovery</b> — explain the signals &nbsp;&nbsp; · &nbsp;&nbsp; <b>Training</b> — turn readiness into action</sub>
+  <img src="assets/screenshots/gallery-04.jpeg" width="30%" alt="Halaty product screen 4" />
+  &nbsp;
+  <img src="assets/screenshots/gallery-05.jpeg" width="30%" alt="Halaty product screen 5" />
+  &nbsp;
+  <img src="assets/screenshots/gallery-06.jpeg" width="30%" alt="Halaty product screen 6" />
 </p>
 
-> Screenshots in this showcase are from the current pre-launch iOS build.
+<p align="center">
+  <img src="assets/screenshots/gallery-07.jpeg" width="30%" alt="Halaty product screen 7" />
+  &nbsp;
+  <img src="assets/screenshots/gallery-08.jpeg" width="30%" alt="Halaty product screen 8" />
+  &nbsp;
+  <img src="assets/screenshots/gallery-09.jpeg" width="30%" alt="Halaty product screen 9" />
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/gallery-10.jpeg" width="30%" alt="Halaty product screen 10" />
+  &nbsp;
+  <img src="assets/screenshots/gallery-11.jpeg" width="30%" alt="Halaty product screen 11" />
+  &nbsp;
+  <img src="assets/screenshots/gallery-12.jpeg" width="30%" alt="Halaty product screen 12" />
+</p>
+
+<p align="center">
+  <sub>Selected current-build screens — Arabic-first UI, daily health interpretation, tracking, training, nutrition, and progress.</sub>
+</p>
 
 ---
 
@@ -94,16 +118,6 @@ Halaty's core health experience is designed to answer two questions quickly:
 
 A top-level summary stays simple, while deeper screens expose measurements, history, and context for users who want to inspect the detail.
 
-<p align="center">
-  <img src="assets/screenshots/02-sleep-overview.jpg" width="42%" alt="Halaty Sleep overview" />
-  &nbsp;&nbsp;
-  <img src="assets/screenshots/04-recovery.jpg" width="42%" alt="Halaty Recovery overview" />
-</p>
-
-<p align="center">
-  <sub><b>Sleep</b> — summarize the night &nbsp;&nbsp; · &nbsp;&nbsp; <b>Recovery</b> — translate signals into context</sub>
-</p>
-
 ### Sleep
 
 The sleep area separates the headline score from the deeper explanation. Users can move from a quick summary into duration, consistency, stage context, sleep debt, and longer-term interpretation.
@@ -151,10 +165,6 @@ It includes product concepts around:
 - muscle-recovery context;
 - imported workout information from Apple Health / Apple Watch;
 - linking training decisions back to recovery.
-
-<p align="center">
-  <img src="assets/screenshots/07-training.jpg" width="42%" alt="Halaty Training home" />
-</p>
 
 A central product goal is to avoid treating recovery and training as separate stories: **how the user recovered should matter to what training feels appropriate today.**
 
