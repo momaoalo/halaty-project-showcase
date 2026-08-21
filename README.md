@@ -16,13 +16,13 @@
 
 ## Overview
 
-**حالتي** is a personal health application designed to bring several daily health workflows into one place instead of making the user move between separate apps for sleep, recovery, nutrition, training and progress.
+**حالتي** is a personal health application designed around a simple product challenge: people often use separate tools for sleep/recovery, nutrition, workouts, and progress, then have to interpret the pieces themselves.
 
-The product is built around three simple questions:
+The product brings those areas into one experience built around three questions:
 
 > **How am I today? Why? What should I do next?**
 
-This repository is a public **product showcase and case study** for the current pre-launch build. The active application source remains private while the project is still under development.
+This repository is a public **product portfolio and case study** for the current pre-launch build.
 
 ---
 
@@ -40,44 +40,88 @@ This repository is a public **product showcase and case study** for the current 
 
 ---
 
-## The product problem
+## What this project demonstrates
 
-Health data is often fragmented. A user may check sleep and recovery in one app, log food in another, track workouts somewhere else, and then interpret progress manually.
+| Capability | Evidence in this repository |
+| --- | --- |
+| **Business analysis** | problem framing, requirements, user stories, acceptance criteria, prioritization, traceability |
+| **Project coordination** | scope breakdown, workstreams, dependencies, risks/issues, prioritization, iterative delivery |
+| **Product analysis** | feature definition, competitor/product comparison, trade-offs, prioritization, iteration |
+| **UX / process thinking** | user flows, friction reduction, information hierarchy, Arabic-first design |
+| **Systems thinking** | data flows, local/cloud boundaries, HealthKit integration, architecture documentation |
+| **Testing & quality mindset** | functional review, missing-data behavior, automated quality/release checks |
+| **Technical communication** | architecture diagrams, selected implementation logic, documented decisions |
 
-حالتي explores a more connected experience: each area remains useful on its own, while the overall product helps the user understand the day as one picture.
+### Review the project from your perspective
 
-### Core product loop
-
-```mermaid
-flowchart LR
-    A[Health signals] --> D[Understand today]
-    B[Nutrition & manual logs] --> D
-    C[Training & activity] --> D
-    D --> E[Understand why]
-    E --> F[Choose the next action]
-    F --> G[Review progress]
-    G --> D
-```
+| Perspective | Start here |
+| --- | --- |
+| **Business Analysis / Requirements** | **[Business Analysis Case Study →](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)** |
+| **Project Coordination / PMO** | **[Project Delivery Case Study →](docs/PROJECT-DELIVERY-CASE-STUDY.md)** |
+| **Product / Decision Making** | **[Decision Case Study →](docs/DECISION-CASE-STUDY.md)** |
+| **Product & UX** | **[Product & UX Design →](docs/PRODUCT-DESIGN.md)** |
+| **Systems / Technical Review** | **[System Architecture →](docs/ARCHITECTURE.md)** |
 
 ---
 
-## My role
+## My contribution
 
-My main contribution to حالتي is in **product analysis, product direction and user experience**.
+My strongest direct contribution to حالتي is in **product analysis, requirements, product direction, UX, testing, and prioritization**.
 
-I worked on areas such as:
+I have worked across the product by:
 
-- defining and refining product requirements;
-- breaking broad ideas into practical user flows;
-- reviewing screens and identifying usability or functional gaps;
+- turning broad ideas into clearer requirements and user flows;
+- reviewing implemented screens and identifying usability or functional gaps;
 - simplifying repeated workflows such as food and workout logging;
-- deciding what belongs on the main screen versus deeper analysis pages;
+- deciding what belongs on a daily summary versus deeper analysis;
 - comparing product approaches and prioritizing improvements;
-- testing the application and iterating on issues found in real use;
-- shaping Arabic-first navigation, hierarchy and terminology;
-- coordinating product decisions across health, nutrition, training and progress features.
+- testing real flows and iterating when the result did not match the intended experience;
+- shaping Arabic-first navigation, hierarchy, and terminology;
+- coordinating decisions across health, nutrition, training, and progress areas.
 
-The project has also been developed with extensive **AI-assisted coding**. My strongest hands-on area is the product, requirements and front-end experience; the technical documentation is included to explain how the current application is structured, not to present me as a specialist backend engineer.
+**Implementation approach:** the application has been developed iteratively with AI-assisted coding. My strongest hands-on area is the **product, requirements, front-end experience, and review of the implemented result**.
+
+---
+
+## A concrete example: nutrition logging
+
+A feature list does not show how a requirement was reached. The nutrition flow is one example of the analysis process.
+
+**Problem:** food logging is repeated several times a day, so unnecessary steps create friction.
+
+**Requirement:** allow users to select a food, choose **Serving Size × Quantity**, reuse frequent items, and confirm the transaction without repeating the full search path every time.
+
+**Product response:** search + portion workflow + quick/recent/saved logging + barcode support + immediate daily-total updates.
+
+```text
+Problem
+  → User need
+  → Requirement
+  → Priority
+  → Flow
+  → Implementation
+  → Review / iteration
+```
+
+The full requirement set, acceptance criteria, prioritization, and traceability are documented in the **[Business Analysis Case Study](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)**.
+
+---
+
+## Product / UX approach
+
+A recurring design decision is:
+
+> **Keep the daily surface simple; place depth behind drill-down.**
+
+| Level | User question | Experience |
+| --- | --- | --- |
+| **1** | How am I? | headline state and the most relevant next step |
+| **2** | Why? | contributing measurements and context |
+| **3** | What changed? | history, trends, and deeper analysis |
+
+This structure is reused across sleep, recovery, strain, nutrition, and training so the product can support both a quick daily check and deeper inspection.
+
+The alternatives and trade-offs behind this choice are documented in the **[Decision Case Study](docs/DECISION-CASE-STUDY.md)**.
 
 ---
 
@@ -86,32 +130,35 @@ The project has also been developed with extensive **AI-assisted coding**. My st
 | Area | Purpose |
 | --- | --- |
 | **Today** | turn multiple signals into one understandable daily state |
-| **Sleep** | show sleep quality, duration, consistency and deeper sleep context |
-| **Recovery** | interpret HRV, resting heart rate, sleep and recent load against personal history |
+| **Sleep** | show sleep quality, duration, consistency, and deeper context |
+| **Recovery** | interpret HRV, resting heart rate, sleep, and recent load against personal history |
 | **Strain** | represent accumulated physical load separately from recovery |
-| **Nutrition** | make food logging faster through search, barcode, saved meals and quick repeat actions |
-| **Training** | connect plans, sessions, progression and muscle-recovery context |
-| **Body & Progress** | track weight, body composition, goals and longer-term changes |
+| **Nutrition** | make food logging faster through search, barcode, saved meals, and quick repeat actions |
+| **Training** | connect plans, sessions, progression, and muscle-recovery context |
+| **Body & Progress** | track weight, body composition, goals, and longer-term changes |
 | **Timeline & Reports** | connect planned activities with what actually happened and show trends over time |
 | **Friends / Coaching** | support controlled sharing and contextual guidance |
 
 ---
 
-## Product / UX approach
+## Project delivery view
 
-A recurring design rule is:
+Because حالتي spans several domains, delivery is organized as workstreams rather than one long feature list:
 
-> **Keep the daily surface simple; place depth behind drill-down.**
+```mermaid
+flowchart LR
+    A[Core health] --> E[Cross-product consistency]
+    B[Nutrition] --> E
+    C[Training] --> E
+    D[Platform] --> E
+    E --> F[Progress / reports]
+    F --> G[Quality & pre-launch readiness]
+    G --> H[Audit and iterate]
+```
 
-| Level | User question | Experience |
-| --- | --- | --- |
-| **1** | How am I? | headline state and the most relevant next step |
-| **2** | Why? | contributing measurements and context |
-| **3** | What changed? | history, trends and deeper analysis |
+The project-delivery case study covers **scope, prioritization, dependencies, risks/issues, and an example delivery cycle** without presenting an independent project as formal people-management experience.
 
-This structure is used across sleep, recovery, strain, nutrition and training so the product can serve both quick daily use and users who want more detail.
-
-For more detail, see **[Product & UX Design →](docs/PRODUCT-DESIGN.md)**.
+**[Project Delivery Case Study →](docs/PROJECT-DELIVERY-CASE-STUDY.md)**
 
 ---
 
@@ -122,11 +169,11 @@ The current application uses:
 - **React Native / Expo** for the mobile application;
 - **HealthKit** for supported Apple Health signals;
 - **MMKV** for local-first persistence;
-- **Supabase** for authentication, database and cloud synchronization;
+- **Supabase** for authentication, database, and cloud synchronization;
 - **TypeScript** across the application;
 - an Arabic/English interface with RTL/LTR support.
 
-At a high level, the application separates health-data ingestion, domain logic, local storage, synchronization and presentation rather than keeping everything inside screen components.
+At a high level, the application separates health-data ingestion, domain logic, local storage, synchronization, and presentation.
 
 ```mermaid
 flowchart TB
@@ -138,7 +185,7 @@ flowchart TB
     SYNC <--> SB[(Supabase)]
 ```
 
-Technical documentation is available for reviewers who want additional detail:
+Technical reviewers can go deeper without making the main portfolio page code-heavy:
 
 | Topic | Document |
 | --- | --- |
@@ -153,9 +200,9 @@ Technical documentation is available for reviewers who want additional detail:
 
 ## Current state
 
-حالتي is an **active pre-launch personal project**. The current build includes working and evolving experiences across daily health, sleep, recovery, strain, nutrition, training, progress, reports, onboarding and Apple Health integration.
+حالتي is an **active pre-launch personal project**. The current build includes working and evolving experiences across daily health, sleep, recovery, strain, nutrition, training, progress, reports, onboarding, and Apple Health integration.
 
-Some areas are more mature than others. The current focus is improving consistency, data reliability and the experience of moving between the different health domains as one product.
+The current focus is improving consistency, data reliability, and the experience of moving between the different health domains as one coherent product.
 
 ---
 
