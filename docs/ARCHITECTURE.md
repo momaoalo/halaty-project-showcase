@@ -128,7 +128,7 @@ The phone/watch boundary is designed around the possibility of delayed delivery 
 3. **Missing is not zero** — unavailable measurements remain unavailable.
 4. **Personal baselines where appropriate** — recovery-related signals are interpreted against the user’s own history.
 5. **Server-side privilege boundaries** — privileged operations stay outside the mobile bundle.
-6. **Arabic is part of the product structure** — RTL, terminology, hierarchy, and search behavior are considered from the start.
+6. **Localization is an interface concern** — Arabic/English resources, RTL/LTR behavior, terminology, and hierarchy are handled within the product structure.
 
 ## Related documents
 
