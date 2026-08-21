@@ -109,7 +109,22 @@ This sequencing keeps the core transaction usable before adding more surface are
 | Users need immediate feedback after a log | Update daily totals | Calories and macros refresh after confirmation | Nutrition daily summary |
 | Packaged foods are difficult to find manually | Support barcode lookup | Barcode scanner flow | Barcode screen in current build |
 
-## 9. What this case demonstrates
+## 9. Validation / success measures
+
+Because the product is still pre-launch, these are **validation targets**, not claimed production results.
+
+Useful measures for this flow include:
+
+- successful meal-log completion;
+- number of actions required for a repeated food/meal;
+- time to complete a repeat log;
+- correction/back-out rate after choosing a serving;
+- use of quick/recent/saved paths versus full search;
+- user-reported clarity of serving and quantity.
+
+These measures would help determine whether the redesigned flow actually reduces friction rather than only looking simpler.
+
+## 10. What this case demonstrates
 
 This case demonstrates the part of business analysis I enjoy most:
 
@@ -117,6 +132,5 @@ This case demonstrates the part of business analysis I enjoy most:
 2. separating core requirements from convenience features;
 3. translating needs into a clear flow;
 4. defining expected behavior;
-5. reviewing the implemented result and iterating when friction remains.
-
-No performance improvement percentage is claimed here because the product is still pre-launch and does not yet have a production user cohort large enough to support that measurement.
+5. defining how the result should be validated;
+6. reviewing the implemented result and iterating when friction remains.
