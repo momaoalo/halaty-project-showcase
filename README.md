@@ -4,9 +4,9 @@
 
 # حالتي
 
-### One connected view of your health day
+### Your health day, all in one place
 
-**Sleep · Recovery · Daily Load · Nutrition · Training · Progress — connected in one experience**
+**Sleep · Recovery · Daily Load · Nutrition · Training · Progress — one connected experience**
 
 `Pre-launch` · `iOS` · `React Native / Expo` · `HealthKit` · `Supabase`
 
@@ -18,13 +18,13 @@
 
 Health tracking is often fragmented: sleep and recovery in one place, nutrition in another, workouts somewhere else, and progress tracked separately.
 
-**حالتي** brings those parts together so the user can follow their health day as **one connected picture** instead of moving between separate trackers and interpreting each area in isolation.
+**حالتي** brings those parts into one place, giving the user a **clearer view of their health day** without having to piece the story together across separate trackers.
 
 The experience is organized around three practical questions:
 
 > **How am I today? What is driving that state? What should I do next?**
 
-When the user chooses to share relevant information, the same connected view can also make follow-up easier for a **coach or trainer** by keeping training, recovery, nutrition, and progress in context rather than as separate updates.
+If the user chooses to share selected information, the same structure can also make follow-up easier for a **coach or trainer** — so training, recovery, nutrition, and progress can be reviewed in context rather than as isolated updates.
 
 This repository is a public **product portfolio and case study** for the current pre-launch build.
 
