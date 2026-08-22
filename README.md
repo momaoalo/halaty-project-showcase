@@ -109,26 +109,25 @@ When the user chooses to share relevant information, the product can support a m
 
 ## Project evidence
 
-This repository documents not only what the application contains, but also how problems were analyzed, decisions were made, and work was organized.
+This repository documents not only what the application contains, but also how product problems were analyzed, requirements were clarified, decisions were made, and implemented flows were reviewed.
 
 | Area | Evidence |
 | --- | --- |
 | **Requirements & process analysis** | problem framing, user needs, requirements, user stories, acceptance criteria, prioritization, traceability |
-| **Planning & delivery** | scope breakdown, workstreams, dependencies, risks/issues, prioritization, iterative delivery |
-| **Product decisions & prioritization** | alternatives, trade-offs, feature decisions, sequencing, review and iteration |
+| **Product decisions & prioritization** | alternatives, trade-offs, feature decisions, priority choices, review and iteration |
 | **Product & UX thinking** | user flows, friction reduction, information hierarchy, bilingual/RTL-aware interaction design |
 | **Systems & technical context** | data flows, local/cloud boundaries, HealthKit integration, architecture documentation |
-| **Testing & quality** | functional review, missing-data behavior, quality gates and release checks |
+| **Testing & quality** | functional review, missing-data behavior, quality checks and implementation review |
 
 ### Selected case studies and documentation
 
 | Topic | Document |
 | --- | --- |
 | **Requirements & process analysis** | **[Nutrition logging case study →](docs/BUSINESS-ANALYSIS-CASE-STUDY.md)** |
-| **Planning & delivery** | **[Project delivery case study →](docs/PROJECT-DELIVERY-CASE-STUDY.md)** |
 | **Product decisions & trade-offs** | **[Decision case study →](docs/DECISION-CASE-STUDY.md)** |
 | **Product & UX thinking** | **[Product & UX design →](docs/PRODUCT-DESIGN.md)** |
 | **Systems & technical context** | **[System architecture →](docs/ARCHITECTURE.md)** |
+| **Product iteration reflection** | **[Product delivery reflection →](docs/PROJECT-DELIVERY-CASE-STUDY.md)** |
 
 ---
 
@@ -194,22 +193,23 @@ The alternatives and trade-offs behind this choice are documented in the **[deci
 
 ---
 
-## Planning & delivery
+## Product iteration
 
-Because حالتي spans several connected domains, the work is organized as workstreams rather than one long feature list:
+Because حالتي spans several connected areas, I use a simple product-review loop rather than treating implementation as completion:
 
-```mermaid
-flowchart LR
-    A[Core health] --> E[Connected experience]
-    B[Nutrition] --> E
-    C[Training] --> E
-    D[Platform] --> E
-    E --> F[Progress / reports]
-    F --> G[Quality & pre-launch readiness]
-    G --> H[Audit and iterate]
+```text
+Observe a problem
+→ define the desired behavior
+→ prioritize it
+→ implement an iteration
+→ review the real screen / flow
+→ identify gaps
+→ refine
 ```
 
-The **[project delivery case study](docs/PROJECT-DELIVERY-CASE-STUDY.md)** documents scope, priorities, dependencies, risks/issues, and an example iteration cycle.
+This is a practical reflection of how I review and improve the product. It is **not presented as formal PMO, RAID, dependency-management, or workstream-management experience**.
+
+The **[product delivery reflection](docs/PROJECT-DELIVERY-CASE-STUDY.md)** gives a concrete example of this iteration approach.
 
 ---
 
